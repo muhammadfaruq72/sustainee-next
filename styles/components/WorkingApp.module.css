@@ -92,7 +92,12 @@
   margin-left: 47px;
 }
 
-.rotation {
+.ProcessSVGrotation {
+  width: 37px;
+  height: 41px;
+  stroke: #ea2d49;
+  transition: 0.4s ease-out;
+  margin-left: 47px;
   animation: rotation 2.5s infinite linear;
 }
 

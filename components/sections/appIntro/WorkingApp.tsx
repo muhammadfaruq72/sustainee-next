@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../../styles/components/WorkingApp.module.css";
 import Plus from "../../../public/images/appExplore/plus";
 import Cube from "../../../public/images/appExplore/cube";
@@ -6,9 +6,8 @@ import PictureSVG from "../../../public/images/appExplore/picture";
 import Process from "../../../public/images/appExplore/process";
 import Arrow from "../../../public/images/appExplore/Arrow";
 import back from "../../../public/images/back.png";
-//import Mutation from "./ApolloWorkingApp";
 import { base64StringToBlob } from "blob-util";
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import pWaitFor from "p-wait-for";
 
 interface File {
@@ -26,206 +25,57 @@ interface ImagesOBJ {
   Stickerinator?: string;
 }
 
-var MUTATION: any;
 var waitForMutate: Boolean = true;
 var selectedFilesArray: File[] = [];
-var selectedFilesArrayDuplicate: File[] = [];
-var StartBoolean: Boolean = false;
 var waitForRes: number = 1;
+
 export default function WorkingApp() {
   const [selectedImages, setSelectedImages] = useState(Array<ImagesOBJ>);
   const [gliderState, setGlider] = useState("0");
-  //const [StartBoolean, setStartBoolean] = useState(true);
-
-  if (gliderState === "0") {
-    MUTATION = gql`
-      mutation ($file: Upload!) {
-        U2net(file: $file) {
-          name
-          imageFile
-        }
-      }
-    `;
-  }
-  if (gliderState === "1") {
-    MUTATION = gql`
-      mutation ($file: Upload!) {
-        Stickerinator(file: $file) {
-          name
-          imageFile
-        }
-      }
-    `;
-  }
-
+  const [StartBoolean, setStartBoolean] = useState(false);
   const [mutate, { loading, error, data: mutateResponse }] = useMutation(
-    MUTATION,
+    MUTATION(gliderState),
     {
       onCompleted(data) {
-        //console.log("onCompleted", data);
-        const contentType = "image/png";
-        var blob;
-        var name: any;
         if (gliderState === "0") {
-          blob = base64StringToBlob(data.U2net.imageFile, contentType);
-          name = data.U2net.name;
-          const blobImage = URL.createObjectURL(blob);
-          setSelectedImages((current) =>
-            current.map((obj) => {
-              //console.log("Start typeof U2net", typeof obj.U2net);
-              if (obj.Imagename === name) {
-                return { ...obj, U2net: blobImage };
-              }
-              //console.log("end typeof U2net", typeof obj.U2net);
-              return obj;
-            })
-          );
+          ResponseData(data.U2net, "U2net", setSelectedImages);
         } else {
-          blob = base64StringToBlob(data.Stickerinator.imageFile, contentType);
-          name = data.Stickerinator.name;
-          const blobImage = URL.createObjectURL(blob);
-          setSelectedImages((current) =>
-            current.map((obj) => {
-              //console.log("Start typeof U2net", typeof obj.U2net);
-              if (obj.Imagename === name) {
-                return { ...obj, Stickerinator: blobImage };
-              }
-              //console.log("end typeof U2net", typeof obj.U2net);
-              return obj;
-            })
-          );
+          ResponseData(data.Stickerinator, "Stickerinator", setSelectedImages);
         }
         waitForMutate = true;
-        //console.log("onCompleted waitForMutate", waitForMutate);
         waitForRes = waitForRes + 1;
       },
     }
   );
 
-  const handleSize = (event: any) => {
-    //console.log(image?.offsetWidth);
-  };
+  const handleSize = (event: any) => {};
 
   const onSelectFile = async (event: any) => {
-    const selectedFiles: File[] = Array.from(event.target.files);
-    //console.log("selectedFiles", selectedFiles);
-    selectedFilesArrayDuplicate =
-      selectedFilesArrayDuplicate.concat(selectedFiles);
-    //console.log("selectedFilesArray", selectedFilesArray);
-    //selectedFilesArray.push(selectedFilesArray);
-    //console.log("selectedFilesArray", selectedFilesArray);
+    var selectedFiles: File[] = Array.from(event.target.files);
+    selectedFilesArray = selectedFilesArray.concat(selectedFiles);
 
     const imagesArray: Array<ImagesOBJ> = selectedFiles.map((image: any) => {
-      //console.log(typeof image, image);
-      // console.log(
-      //   typeof URL.createObjectURL(image),
-      //   URL.createObjectURL(image)
-      // );
       return {
         Imagename: image.name,
         originalImage: URL.createObjectURL(image),
       };
     });
-    //console.log("imagesArray", imagesArray);
+
+    selectedFiles = [];
     setSelectedImages(selectedImages.concat(imagesArray));
   };
 
-  const onStartButton = async () => {
-    var zero = 0;
-    var one = 0;
-    for (let i = 0; i < selectedImages.length; i++) {
-      if (typeof selectedImages[i].U2net === "undefined") {
-        zero = zero + 1;
-      }
-      if (typeof selectedImages[i].Stickerinator === "undefined") {
-        one = one + 1;
-      }
-      console.log("zero", zero, "one", one);
-    }
-
-    try {
-      // console.log(
-      //   "0 = selectedFilesArrayDuplicate",
-      //   selectedFilesArrayDuplicate
-      // );
-      // console.log("0 selectedFilesArray", selectedFilesArray);
-      for (let i = 0; i < selectedFilesArrayDuplicate.length; i++) {
-        if (
-          gliderState === "0" &&
-          typeof selectedImages[i].U2net === "undefined"
-        ) {
-          if (waitForRes >= selectedFilesArrayDuplicate.length + 1) {
-            waitForRes = selectedFilesArrayDuplicate.length - zero;
-            waitForRes = waitForRes + 1;
-            console.log("At zero waitForRes", waitForRes);
-          }
-          //console.log("forEach Before waitUntil", waitForMutate);
-          StartBoolean = true;
-          await pWaitFor(() => waitForMutate == true);
-          var file = selectedFilesArrayDuplicate[i];
-          //console.log("tempFile", file);
-
-          mutate({ variables: { file } });
-          waitForMutate = false;
-          if (i == selectedFilesArrayDuplicate.length - 1) {
-            await pWaitFor(
-              () => waitForRes == selectedFilesArrayDuplicate.length + 1
-            );
-            //console.log("0 wait StartBoolean", StartBoolean);
-            StartBoolean = false;
-          }
-          StartBoolean = false;
-          //console.log("forEach After waitUntil", waitForMutate);
-        }
-
-        if (
-          gliderState === "1" &&
-          typeof selectedImages[i].Stickerinator === "undefined"
-        ) {
-          if (waitForRes >= selectedFilesArrayDuplicate.length + 1) {
-            waitForRes = selectedFilesArrayDuplicate.length - one;
-            waitForRes = waitForRes + 1;
-            console.log("At one waitForRes", waitForRes);
-          }
-          //console.log("forEach Before waitUntil", waitForMutate);
-          StartBoolean = true;
-          await pWaitFor(() => waitForMutate == true);
-          var file = selectedFilesArrayDuplicate[i];
-          //console.log("tempFile", file);
-
-          mutate({ variables: { file } });
-          waitForMutate = false;
-          if (i == selectedFilesArrayDuplicate.length - 1) {
-            await pWaitFor(
-              () => waitForRes == selectedFilesArrayDuplicate.length + 1
-            );
-            StartBoolean = false;
-            //console.log("1 wait StartBoolean", StartBoolean);
-          }
-          StartBoolean = false;
-          //console.log("forEach After waitUntil", waitForMutate);
-        }
-      }
-    } catch (err) {
-      alert(err);
-    }
+  const onStartButton = () => {
+    setStartBoolean(true);
+    StartButton(selectedImages, gliderState, mutate).then(function () {
+      setStartBoolean(false);
+      console.log("I'm excecuted", StartBoolean);
+    });
   };
 
   useEffect(() => {
-    // console.log("UseEffect selectedFilesArray", selectedFilesArray);
-    // console.log(
-    //   "UseEffect selectedFilesArrayDuplicate",
-    //   selectedFilesArrayDuplicate
-    // );
-    // console.log("UseEffect selectedImages of Array", selectedImages);
-    console.log(
-      "UseEffect waitForRes",
-      waitForRes,
-      selectedFilesArrayDuplicate.length,
-      StartBoolean
-    );
-    //console.log("UseEffect StartBoolean", StartBoolean);
-  }, [selectedImages, StartBoolean]);
+    console.log("UseEffect StartBoolean", StartBoolean);
+  }, [StartBoolean]);
 
   const glider = (e: any) => {
     setGlider(e.currentTarget.id);
@@ -278,7 +128,13 @@ export default function WorkingApp() {
             </div>
           </div>
           <div className={styles.btnAnimated} onClick={onStartButton}>
-            <Process className={`${styles.ProcessSVG} `} />
+            <Process
+              className={`${
+                StartBoolean !== true
+                  ? styles.ProcessSVG
+                  : styles.ProcessSVGrotation
+              }`}
+            />
             <h4 className={styles.textAnimBtn}>Start</h4>
             <Arrow className={styles.ArrowSVG} />
           </div>
@@ -414,4 +270,108 @@ export default function WorkingApp() {
       </div>
     </div>
   );
+}
+
+function MUTATION(gliderState: any) {
+  var MUTATION: any;
+  if (gliderState === "0") {
+    MUTATION = gql`
+      mutation ($file: Upload!) {
+        U2net(file: $file) {
+          name
+          imageFile
+        }
+      }
+    `;
+    return MUTATION;
+  }
+  if (gliderState === "1") {
+    MUTATION = gql`
+      mutation ($file: Upload!) {
+        Stickerinator(file: $file) {
+          name
+          imageFile
+        }
+      }
+    `;
+    return MUTATION;
+  }
+}
+
+const contentType = "image/png";
+var blob;
+var name: any;
+function ResponseData(data: any, Model: any, setSelectedImages: any) {
+  blob = base64StringToBlob(data.imageFile, contentType);
+  name = data.name;
+  const blobImage = URL.createObjectURL(blob);
+  setSelectedImages((current: any) =>
+    current.map((obj: any) => {
+      if (obj.Imagename === name && Model === "U2net") {
+        return { ...obj, U2net: blobImage };
+      }
+      if (obj.Imagename === name && Model === "Stickerinator") {
+        return { ...obj, Stickerinator: blobImage };
+      }
+      return obj;
+    })
+  );
+}
+
+async function StartButton(selectedImages: any, gliderState: any, mutate: any) {
+  var zero = 0;
+  var one = 0;
+  for (let i = 0; i < selectedImages.length; i++) {
+    if (typeof selectedImages[i].U2net === "undefined") {
+      zero = zero + 1;
+    }
+    if (typeof selectedImages[i].Stickerinator === "undefined") {
+      one = one + 1;
+    }
+    console.log("zero", zero, "one", one);
+  }
+
+  try {
+    for (let i = 0; i < selectedFilesArray.length; i++) {
+      if (
+        gliderState === "0" &&
+        typeof selectedImages[i].U2net === "undefined"
+      ) {
+        if (waitForRes >= selectedFilesArray.length + 1) {
+          waitForRes = selectedFilesArray.length - zero;
+          waitForRes = waitForRes + 1;
+          console.log("At zero waitForRes", waitForRes);
+        }
+        await pWaitFor(() => waitForMutate == true);
+        var file = selectedFilesArray[i];
+
+        mutate({ variables: { file } });
+        waitForMutate = false;
+        if (i == selectedFilesArray.length - 1) {
+          await pWaitFor(() => waitForRes == selectedFilesArray.length + 1);
+        }
+      }
+
+      if (
+        gliderState === "1" &&
+        typeof selectedImages[i].Stickerinator === "undefined"
+      ) {
+        if (waitForRes >= selectedFilesArray.length + 1) {
+          waitForRes = selectedFilesArray.length - one;
+          waitForRes = waitForRes + 1;
+          console.log("At one waitForRes", waitForRes);
+        }
+        await pWaitFor(() => waitForMutate == true);
+        var file = selectedFilesArray[i];
+
+        mutate({ variables: { file } });
+        waitForMutate = false;
+        if (i == selectedFilesArray.length - 1) {
+          await pWaitFor(() => waitForRes == selectedFilesArray.length + 1);
+        }
+      }
+    }
+  } catch (err) {
+    alert(err);
+  }
 }

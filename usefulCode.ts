@@ -36,8 +36,3 @@ function delay(ms: any) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 delay(2000);
-
-
-${
-  StartBoolean !== true ? "" : styles.rotation
-}
