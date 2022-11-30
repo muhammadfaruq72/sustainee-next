@@ -1,0 +1,92 @@
+.Wrapper {
+  max-width: 1018px;
+  min-height: 332px;
+  padding: 17px 120px;
+  margin-top: 30px;
+  background: #f5f5f5;
+  border-radius: 19px;
+
+  @media (max-width: 1018px) {
+    display: block;
+    max-width: 490px;
+    min-height: 490px;
+    padding: 12px;
+  }
+}
+
+.ContentWrapper {
+  display: grid;
+  grid-template-columns: 254px auto;
+  gap: 70px;
+  align-items: center;
+
+  @media (max-width: 1018px) {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 17px;
+  }
+}
+
+.Image {
+  max-width: 254px;
+  height: 291.9px;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  @media (max-width: 1018px) {
+    margin: 0 auto;
+  }
+}
+
+.Image:hover {
+  transform: translateY(-10px);
+}
+
+.HoriWrapper {
+  display: grid;
+  gap: 20px;
+}
+
+.Title {
+  margin: 0 auto;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+
+  @media (max-width: 450px) {
+    font-size: calc(16.5px + (60 - 35) * ((100vw - 250px) / (1600 - 250)));
+  }
+}
+
+.Subtitle {
+  margin: 0 auto;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.74);
+  font-size: 15px;
+  line-height: 140%;
+}
+
+.Button {
+  width: 145px;
+  height: 41px;
+  padding: 7px;
+  background: #ea2d49;
+  border-radius: 50px;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.Button:hover {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+  transform: translateY(-3px);
+  background: #da2742;
+}
+
+.ButtonName {
+  color: white;
+  font-weight: 250;
+  font-size: 20px;
+}

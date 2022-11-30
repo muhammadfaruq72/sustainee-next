@@ -1,0 +1,407 @@
+.Wrapper {
+  background: #fff;
+  overflow: hidden;
+}
+
+.ContentWrapper {
+  max-width: 1234px;
+  margin: 0 auto;
+  padding: 30px 10px;
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 60px;
+}
+
+.TextWrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  gap: 15px;
+
+  @media (max-width: 450px) {
+    max-width: 370px;
+  }
+}
+
+.Title {
+  color: black;
+  margin: 0 auto;
+  font-weight: 600;
+  font-size: 30px;
+
+  @media (max-width: 450px) {
+    font-size: calc(16.5px + (60 - 35) * ((100vw - 250px) / (1600 - 250)));
+  }
+}
+
+.Description {
+  max-width: 469px;
+  color: rgba(0, 0, 0, 0.55);
+  font-weight: 400;
+  font-size: 20px;
+  margin: 0 auto;
+  line-height: 110%;
+  text-align: center;
+
+  @media (max-width: 450px) {
+    font-size: calc(12.5px + (40 - 35) * ((100vw - 250px) / (1600 - 250)));
+  }
+}
+
+.Stack {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  align-items: start;
+  gap: 20px;
+  margin-bottom: -35px;
+}
+
+.btnAnimated {
+  background-color: rgba(245, 245, 245, 0.8);
+  border-radius: 16px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  width: 240px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.004) 0px 0.783403px 0.783403px 0px,
+    rgba(0, 0, 0, 0.01) 0px 1.92107px 1.92107px 0px,
+    rgba(0, 0, 0, 0.024) 0px 3.63429px 3.63429px 0px,
+    rgba(0, 0, 0, 0.04) 0px 6.35486px 6.35486px 0px,
+    rgba(0, 0, 0, 0.07) 0px 11.0474px 11.0474px 0px;
+}
+
+.ArrowSVG {
+  width: 37px;
+  height: 41px;
+  stroke: #ea2d49;
+  transform: translateX(250%);
+  transition: 0.3s ease-out;
+}
+
+.ProcessSVG {
+  width: 37px;
+  height: 41px;
+  stroke: #ea2d49;
+  transition: 0.4s ease-out;
+  margin-left: 47px;
+}
+
+.rotation {
+  animation: rotation 2.5s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.btnAnimated:hover .ArrowSVG {
+  transform: translateX(0%);
+  margin-right: 94px;
+}
+
+.btnAnimated:hover .ProcessSVG {
+  transform: translateX(-250%);
+}
+
+.textAnimBtn {
+  font-weight: 500;
+  font-size: 28px;
+  color: #ea2d49;
+}
+
+.ToggleWrapper {
+  padding: 10px;
+  position: relative;
+  background-color: rgba(245, 245, 245, 0.8);
+  box-shadow: rgba(0, 0, 0, 0.004) 0px 0.783403px 0.783403px 0px,
+    rgba(0, 0, 0, 0.01) 0px 1.92107px 1.92107px 0px,
+    rgba(0, 0, 0, 0.024) 0px 3.63429px 3.63429px 0px,
+    rgba(0, 0, 0, 0.04) 0px 6.35486px 6.35486px 0px,
+    rgba(0, 0, 0, 0.07) 0px 11.0474px 11.0474px 0px;
+  border-radius: 16px;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  align-items: center;
+}
+.glider {
+  position: absolute;
+  margin-left: 10px;
+  background: #ea2d49;
+  width: 173px;
+  height: 41px;
+  border-radius: 10px;
+  transition: 0.25s ease-out;
+}
+
+.glider0 {
+  transform: translateX(0%);
+}
+
+.glider1 {
+  transform: translateX(100%);
+}
+
+.ToggleButton {
+  width: 173px;
+  height: 41px;
+  border-radius: 50px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.SVGPicture {
+  width: 25px;
+  height: auto;
+}
+
+.SVGCube {
+  width: 25px;
+  height: auto;
+}
+
+.strokeWhite {
+  stroke: white;
+}
+
+.strokeGrey {
+  stroke: #ea2d49;
+}
+
+.glidertextRed {
+  color: #ea2d49;
+  font-weight: 250;
+  font-size: 20px;
+}
+
+.BoxWrapper {
+  border: 1px solid rgba(0, 0, 0, 0.19);
+  border-radius: 19px;
+  width: 1018px;
+  min-height: 515px;
+  margin: 0 auto;
+  display: grid;
+
+  @media (max-width: 1018px) {
+  }
+}
+
+.AddedImages {
+  max-width: 1018px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ImagesContainer {
+  position: relative;
+  float: left;
+}
+
+.ImageBorder {
+  border: 1px solid rgba(0, 0, 0, 0.19);
+  border-radius: 15px;
+  margin: 20px 0 0 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.ImageBorder::before {
+  content: "";
+  background-image: conic-gradient(#da2742 20deg, transparent 120deg);
+  width: 150%;
+  height: 250%;
+  position: absolute;
+  animation: 2s linear infinite;
+  border-radius: 15px;
+  animation: rotate 8s linear infinite;
+}
+
+.ImageBorder::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 15px;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.Image {
+  border-radius: 13px;
+  height: 250px;
+  width: auto;
+  z-index: 1;
+}
+
+.CrossButton {
+  position: absolute;
+  top: 30px;
+  left: 100%;
+  margin-left: -40px;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  background: rgba(245, 245, 245);
+  border-radius: 50px;
+  box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.4);
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.CrossButton:hover {
+  transform: rotate(-88deg);
+}
+
+.SVGCross {
+  fill: #868686;
+  width: 21px;
+  height: 21px;
+  transform: rotate(-44deg);
+}
+
+.AddImages {
+  width: 250px;
+  height: 250px;
+  border: 2px dashed #868686;
+  border-radius: 19px;
+  margin: 20px 0 0 20px;
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  justify-content: center;
+  align-content: center;
+}
+
+.AddImages:hover {
+  border: 2px dashed #6c6b6b;
+}
+
+.inputImage {
+  display: none;
+}
+
+.PlusImg {
+  margin: 0 auto;
+  margin-bottom: 5px !important;
+  margin: 0 auto;
+}
+
+.SVGPlusImg {
+  fill: #868686;
+  width: 50px;
+}
+
+.AddImages:hover .SVGPlusImg {
+  fill: #6c6b6b;
+}
+
+.BigText {
+  text-align: center;
+  color: #868686;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.AddImages:hover .BigText {
+  color: #6c6b6b;
+}
+
+.SmallText {
+  text-align: center;
+  color: #868686;
+  font-weight: 400;
+  font-size: 15px;
+  margin-top: 5px !important;
+}
+
+.AddImages:hover .SmallText {
+  color: #ea2d49;
+}
+
+.ButtonWrapper {
+  display: grid;
+  grid-template-columns: 145px 145px;
+  gap: 12px;
+  justify-content: right;
+  align-content: flex-end;
+  padding: 30px 30px;
+}
+
+.SimpleButton {
+  margin-left: 60px;
+  width: 145px;
+  height: 41px;
+  padding: 7px;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  border-radius: 10px;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.SimpleButton:hover {
+  border: 1px solid rgba(0, 0, 0, 0.99);
+}
+
+.SimpleName {
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: 250;
+  font-size: 20px;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.SimpleButton:hover .SimpleName {
+  color: rgba(0, 0, 0, 0.99);
+}
+
+.Button {
+  width: 145px;
+  height: 41px;
+  padding: 7px;
+  background: #ea2d49;
+  border-radius: 10px;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.Button:hover {
+  background: #da2742;
+}
+
+.ButtonName {
+  color: white;
+  font-weight: 250;
+  font-size: 20px;
+}

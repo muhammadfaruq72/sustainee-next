@@ -1,0 +1,33 @@
+.H1 {
+  font-weight: bold;
+  font-size: 60px;
+}
+
+.H2 {
+  font-weight: bold;
+  font-size: 40px;
+}
+.H3 {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.H4 {
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.H5 {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.bodyText {
+  font-size: 20px;
+  line-height: 140%;
+}
+
+.subtitle {
+  font-size: 15px;
+  line-height: 140%;
+}

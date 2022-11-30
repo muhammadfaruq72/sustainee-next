@@ -1,0 +1,28 @@
+.Wrapper {
+  background: #f5f5f5;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 30px;
+  max-width: 1018px;
+  border-radius: 19px;
+  padding: 40px 10px;
+  margin-top: 80px !important;
+  margin-bottom: 40px !important;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 1018px) {
+    grid-template-columns: auto auto;
+    gap: 30px;
+  }
+  @media (max-width: 460px) {
+    grid-template-columns: auto;
+    gap: 30px;
+  }
+}
+
+.Description {
+  text-align: justify;
+  max-width: 250px;
+}
