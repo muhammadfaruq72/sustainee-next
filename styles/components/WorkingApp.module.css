@@ -82,6 +82,15 @@
   stroke: #ea2d49;
   transform: translateX(250%);
   transition: 0.3s ease-out;
+  display: none;
+}
+
+.displayNone {
+  display: none;
+}
+
+.displayBlock {
+  display: block;
 }
 
 .ProcessSVG {
@@ -92,12 +101,8 @@
   margin-left: 47px;
 }
 
-.ProcessSVGrotation {
-  width: 37px;
-  height: 41px;
-  stroke: #ea2d49;
-  transition: 0.4s ease-out;
-  margin-left: 47px;
+.rotation {
+  margin-left: 0px;
   animation: rotation 2.5s infinite linear;
 }
 

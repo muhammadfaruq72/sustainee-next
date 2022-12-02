@@ -28,6 +28,7 @@ interface ImagesOBJ {
 var waitForMutate: Boolean = true;
 var selectedFilesArray: File[] = [];
 var waitForRes: number = 1;
+var startTriggered: Boolean = false;
 
 export default function WorkingApp() {
   const [selectedImages, setSelectedImages] = useState(Array<ImagesOBJ>);
@@ -67,10 +68,16 @@ export default function WorkingApp() {
 
   const onStartButton = () => {
     setStartBoolean(true);
-    StartButton(selectedImages, gliderState, mutate).then(function () {
-      setStartBoolean(false);
-      console.log("I'm excecuted", StartBoolean);
-    });
+
+    if (startTriggered === true) {
+      alert("Already triggered");
+    } else {
+      StartButton(selectedImages, gliderState, mutate).then(function () {
+        setStartBoolean(false);
+        startTriggered = false;
+        console.log("I'm excecuted", StartBoolean);
+      });
+    }
   };
 
   useEffect(() => {
@@ -129,14 +136,18 @@ export default function WorkingApp() {
           </div>
           <div className={styles.btnAnimated} onClick={onStartButton}>
             <Process
-              className={`${
-                StartBoolean !== true
-                  ? styles.ProcessSVG
-                  : styles.ProcessSVGrotation
+              className={`${styles.ProcessSVG} ${
+                StartBoolean !== true ? styles.displayBlock : styles.rotation
               }`}
             />
-            <h4 className={styles.textAnimBtn}>Start</h4>
-            <Arrow className={styles.ArrowSVG} />
+            <h4 className={styles.textAnimBtn}>{`${
+              StartBoolean !== true ? "Start" : "Processing"
+            }`}</h4>
+            <Arrow
+              className={`${styles.ArrowSVG} ${
+                StartBoolean !== true ? styles.displayBlock : styles.displayNone
+              }`}
+            />
           </div>
         </div>
         <div className={styles.BoxWrapper}>
@@ -319,6 +330,7 @@ function ResponseData(data: any, Model: any, setSelectedImages: any) {
 }
 
 async function StartButton(selectedImages: any, gliderState: any, mutate: any) {
+  startTriggered = true;
   var zero = 0;
   var one = 0;
   for (let i = 0; i < selectedImages.length; i++) {

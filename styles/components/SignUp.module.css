@@ -1,0 +1,169 @@
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+  animation: fade-in linear 0.5s 1 normal forwards !important;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.overlay {
+  top: 0;
+  left: 0;
+  position: fixed;
+  backdrop-filter: blur(15px);
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.Wrapper {
+  position: absolute;
+  top: calc(50% - 457px / 2);
+  left: calc(50% - 767px / 2);
+  width: 767px;
+  height: 457px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(40px);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 19px;
+  display: grid;
+  align-items: center;
+  padding: 0px 20px;
+}
+
+.ContentWrapper {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.Image {
+  width: 291.59px;
+  height: 414.41px;
+  object-fit: cover;
+  border-radius: 19px;
+}
+
+.SignUpWrapper {
+  display: grid;
+  grid-template-rows: repeat(8, auto);
+  align-content: center;
+  gap: 18px;
+  width: 300px;
+}
+
+.SignUpWrapper input[type="text"] {
+  height: 40px;
+  text-indent: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.14);
+  border: 0px solid rgba(0, 0, 0, 0.14);
+  border-color: rgba(0, 0, 0, 0.14);
+  font-size: 14px;
+}
+
+.SignUpWrapper input[type="text"]:focus {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px #ea2d49,
+    rgba(234, 45, 73, 0.004) 0px 0.783403px 0.783403px 0px,
+    rgba(234, 45, 73, 0.01) 0px 1.92107px 1.92107px 0px,
+    rgba(234, 45, 73, 0.024) 0px 3.63429px 3.63429px 0px,
+    rgba(234, 45, 73, 0.04) 0px 6.35486px 6.35486px 0px,
+    rgba(234, 45, 73, 0.07) 0px 11.0474px 11.0474px 0px,
+    rgba(234, 45, 73, 0.125) 0px 5.249729px 5.249729px 0px;
+  outline: none;
+  transition: 0.1s;
+}
+
+.Button {
+  width: 100%;
+  height: 40px;
+  padding: 7px;
+  background: #ea2d49;
+  border-radius: 10px;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.Button:hover {
+  box-shadow: rgba(234, 45, 73, 0.004) 0px 0.783403px 0.783403px 0px,
+    rgba(234, 45, 73, 0.01) 0px 1.92107px 1.92107px 0px,
+    rgba(234, 45, 73, 0.024) 0px 3.63429px 3.63429px 0px,
+    rgba(234, 45, 73, 0.04) 0px 6.35486px 6.35486px 0px,
+    rgba(234, 45, 73, 0.07) 0px 11.0474px 11.0474px 0px,
+    rgba(234, 45, 73, 0.125) 0px 5.249729px 5.249729px 0px,
+    rgba(234, 45, 73, 0.2) 0px 10px 10px 0px;
+}
+
+.ButtonName {
+  color: white;
+  font-weight: 250;
+  font-size: 20px;
+}
+
+.SignUpWrapper hr {
+  border-top: 3px dashed #bbb;
+}
+
+.line {
+  width: 100%;
+  height: 0px;
+  border-bottom: 1px solid #ea2d49;
+}
+
+.paragraph {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.PwithLink {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: start;
+  gap: 5px;
+}
+
+.CrossButton {
+  position: absolute;
+  top: 10px;
+  left: 100%;
+  margin-left: -40px;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  background: rgba(245, 245, 245);
+  border-radius: 50px;
+  box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.4);
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.CrossButton:hover {
+  transform: rotate(-88deg);
+}
+
+.SVGCross {
+  fill: #868686;
+  width: 21px;
+  height: 21px;
+  transform: rotate(-44deg);
+}

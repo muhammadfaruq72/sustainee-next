@@ -3,7 +3,7 @@
 .HeaderTag {
   position: sticky;
   top: 40px;
-  z-index: 99;
+  z-index: 1;
 
   @media (max-width: 450px) {
     padding: 0px 15px;
