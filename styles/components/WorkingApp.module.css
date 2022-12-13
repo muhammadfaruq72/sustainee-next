@@ -57,79 +57,6 @@
   margin-bottom: -35px;
 }
 
-.btnAnimated {
-  background-color: rgba(245, 245, 245, 0.8);
-  border-radius: 16px;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 10px;
-  width: 240px;
-  cursor: pointer;
-  overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.004) 0px 0.783403px 0.783403px 0px,
-    rgba(0, 0, 0, 0.01) 0px 1.92107px 1.92107px 0px,
-    rgba(0, 0, 0, 0.024) 0px 3.63429px 3.63429px 0px,
-    rgba(0, 0, 0, 0.04) 0px 6.35486px 6.35486px 0px,
-    rgba(0, 0, 0, 0.07) 0px 11.0474px 11.0474px 0px;
-}
-
-.ArrowSVG {
-  width: 37px;
-  height: 41px;
-  stroke: #ea2d49;
-  transform: translateX(250%);
-  transition: 0.3s ease-out;
-  display: none;
-}
-
-.displayNone {
-  display: none;
-}
-
-.displayBlock {
-  display: block;
-}
-
-.ProcessSVG {
-  width: 37px;
-  height: 41px;
-  stroke: #ea2d49;
-  transition: 0.4s ease-out;
-  margin-left: 47px;
-}
-
-.rotation {
-  margin-left: 0px;
-  animation: rotation 2.5s infinite linear;
-}
-
-@keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-}
-
-.btnAnimated:hover .ArrowSVG {
-  transform: translateX(0%);
-  margin-right: 94px;
-}
-
-.btnAnimated:hover .ProcessSVG {
-  transform: translateX(-250%);
-}
-
-.textAnimBtn {
-  font-weight: 500;
-  font-size: 28px;
-  color: #ea2d49;
-}
-
 .ToggleWrapper {
   padding: 10px;
   position: relative;
@@ -196,6 +123,12 @@
 
 .glidertextRed {
   color: #ea2d49;
+  font-weight: 250;
+  font-size: 20px;
+}
+
+.glidertextWhite {
+  color: white;
   font-weight: 250;
   font-size: 20px;
 }
@@ -357,61 +290,9 @@
 
 .ButtonWrapper {
   display: grid;
-  grid-template-columns: 145px 145px;
+  grid-template-columns: auto auto;
   gap: 12px;
   justify-content: right;
   align-content: flex-end;
   padding: 30px 30px;
-}
-
-.SimpleButton {
-  margin-left: 60px;
-  width: 145px;
-  height: 41px;
-  padding: 7px;
-  background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.13);
-  border-radius: 10px;
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  margin: 0 auto;
-  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-.SimpleButton:hover {
-  border: 1px solid rgba(0, 0, 0, 0.99);
-}
-
-.SimpleName {
-  color: rgba(0, 0, 0, 0.4);
-  font-weight: 250;
-  font-size: 20px;
-  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
-.SimpleButton:hover .SimpleName {
-  color: rgba(0, 0, 0, 0.99);
-}
-
-.Button {
-  width: 145px;
-  height: 41px;
-  padding: 7px;
-  background: #ea2d49;
-  border-radius: 10px;
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  margin: 0 auto;
-  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
-.Button:hover {
-  background: #da2742;
-}
-
-.ButtonName {
-  color: white;
-  font-weight: 250;
-  font-size: 20px;
 }

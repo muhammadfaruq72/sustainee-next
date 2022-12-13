@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styles from "../../styles/components/AppExplore.module.css";
+import styleButton from "../../styles/SmallComponents/Buttons.module.css";
 
 interface props {
   title: string;
@@ -18,10 +19,9 @@ export default function AppsExplore(props: props) {
         <h5 className={styles.Title}>{title}</h5>
         <p className={styles.Subtitle}>{subtitle}</p>
         <Link href={link}>
-          {" "}
-          <div className={styles.Button}>
-            <h5 className={styles.ButtonName}>Explore</h5>
-          </div>
+          <button type="button" className={styleButton.Button}>
+            Explore
+          </button>
         </Link>
       </div>
     </div>

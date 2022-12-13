@@ -1,20 +1,29 @@
 import styles from "../styles/Header.module.css";
+import styleButton from "../styles/SmallComponents/Buttons.module.css";
 import SignUp from "./sections/SignUp";
 import LogIn from "./sections/LogIn";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import AuthContext from "./sections/login_AuthContext";
+import User from "../public/images/appExplore/user";
+import Link from "next/link";
 
 export default function Header() {
   const [openSignUp, setSignUp] = useState<Boolean>(false);
   const [openLogIn, setLogIn] = useState<Boolean>(false);
-  const [UpOrIn, setUpOrIn] = useState<null | Boolean>(null);
+  const [UpOrIn, setUpOrIn] = useState<null | string>(null);
+  const { isloggedIn, LogOutUser } = useContext(AuthContext);
 
   useEffect(() => {
-    console.log("useEffect", UpOrIn);
-  }, [UpOrIn]);
+    if (localStorage.getItem("loginRequired") && UpOrIn === null) {
+      setUpOrIn("login");
+      setLogIn(true);
+      localStorage.removeItem("loginRequired");
+    }
+  });
 
   return (
     <>
-      {UpOrIn === false && (
+      {UpOrIn === "login" && (
         <LogIn
           closeLogIn={setLogIn}
           hidden={openLogIn}
@@ -22,7 +31,7 @@ export default function Header() {
           closeSignup={setSignUp}
         />
       )}
-      {UpOrIn === true && (
+      {UpOrIn === "signup" && (
         <SignUp
           closeSignup={setSignUp}
           hidden={openSignUp}
@@ -33,27 +42,45 @@ export default function Header() {
 
       <header className={styles.HeaderTag}>
         <div className={styles.Wrapper}>
-          <img src="../images/LogoSustainee.png" />
-          <div className={styles.ButtonWrapper}>
-            <div
-              className={styles.SimpleButton}
+          <Link href="/">
+            <img src="../images/LogoSustainee.png" />
+          </Link>
+          <div
+            onClick={LogOutUser}
+            className={`${
+              isloggedIn === true ? styles.visible : styles.hidden
+            }`}
+          >
+            <User className={styles.SVGUser} />
+          </div>
+
+          <div
+            className={`${styles.ButtonWrapper} ${
+              isloggedIn === false ? styles.visible : styles.hidden
+            }`}
+          >
+            <button
+              type="button"
+              className={styleButton.roundSimpleBtn}
               onClick={() => {
                 setLogIn(true);
-                setUpOrIn(false);
+                setUpOrIn("login");
               }}
             >
-              <h5 className={styles.SimpleName}>Sign in</h5>
-            </div>
-            <div
-              className={styles.Button}
+              Sign in
+            </button>
+            <button
+              type="button"
+              className={styleButton.roundBtn}
               onClick={() => {
                 setSignUp(true);
-                setUpOrIn(true);
+                setUpOrIn("signup");
               }}
             >
-              <h5 className={styles.ButtonName}>Sign up</h5>
-            </div>
+              Sign up
+            </button>
           </div>
+
           <img className={styles.Hamburger} src="../images/hamburger.png"></img>
         </div>
       </header>

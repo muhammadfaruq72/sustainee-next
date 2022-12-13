@@ -1,29 +1,72 @@
-# schema.py
-import typing
-import strawberry
-from strawberry.file_uploads import Upload
 from PIL import Image
 from rembg import remove
 from pathlib import Path
-from .types import Background
 from SustaineeDjango.settings import BASE_DIR
 from io import BytesIO
 import base64
 from .stickerinator.stickerinator import stickerinator
 from .u2net.u2net_engine import remove_bg as u2net
 
-@strawberry.input
-class FolderInput:
-    files: typing.List[Upload]
+from .Types import Background, SignUp, SignUpInput, SignUpPartialInput, SignUpFilter
+from strawberry_django import mutations
+import strawberry
+from strawberry.file_uploads import Upload
+from typing import List, Union
+from gqlauth.core.directives import TokenRequired
+from gqlauth.core.field_ import field
+from gqlauth.core.types_ import GQLAuthError
+from gqlauth.user import arg_mutations
+from gqlauth.user.queries import UserQueries
+from gqlauth.user.resolvers import Captcha
+
+
+@strawberry.type
+class MyAuthorizedQueries(UserQueries):
+    @strawberry.field
+    def secured_string(self) -> str:
+        return "Good day"
+
 
 @strawberry.type
 class Query:
-    @strawberry.field
-    def hello() -> str:
-        return "world"
+    @field(directives=[TokenRequired()])
+    def auth_entry(self) -> Union[GQLAuthError, MyAuthorizedQueries]:
+        return MyAuthorizedQueries()
+
+    SignUps: List[SignUp] = strawberry.django.field()
+
+
+@strawberry.type
+class AuthMutation:
+    verify_token = arg_mutations.VerifyToken.field
+    update_account = arg_mutations.UpdateAccount.field
+    archive_account = arg_mutations.ArchiveAccount.field
+    delete_account = arg_mutations.DeleteAccount.field
+    password_change = arg_mutations.PasswordChange.field
+
 
 @strawberry.type
 class Mutation:
+    @field(directives=[TokenRequired()])
+    def auth_entry(self) -> Union[GQLAuthError, AuthMutation]:
+        return AuthMutation()
+
+    captcha = Captcha.field
+    token_auth = arg_mutations.ObtainJSONWebToken.field
+    register = arg_mutations.Register.field
+    verify_account = arg_mutations.VerifyAccount.field
+    resend_activation_email = arg_mutations.ResendActivationEmail.field
+    send_password_reset_email = arg_mutations.SendPasswordResetEmail.field
+    password_reset = arg_mutations.PasswordReset.field
+    password_set = arg_mutations.PasswordSet.field
+    refresh_token = arg_mutations.RefreshToken.field
+    revoke_token = arg_mutations.RevokeToken.field
+
+
+    createFruits: List[SignUp] = mutations.create(SignUpInput)
+    updateFruits: List[SignUp] = mutations.update(SignUpPartialInput, filters=SignUpFilter)
+    deleteFruits: List[SignUp] = mutations.delete(filters=SignUpFilter)
+
     @strawberry.mutation
     def Stickerinator(self, file: Upload) -> Background:
         print(file)
@@ -68,19 +111,8 @@ class Mutation:
         #return Background(imageFile=f"http://127.0.0.1:8000/static/media/{fileName[0]}.png")
         return Background(name=str(file), imageFile=output)
 
-    @strawberry.mutation
-    def read_files(self, files: typing.List[Upload]) -> typing.List[str]:
-        contents = []
-        for file in files:
-            content = file.read().decode()
-            contents.append(content)
-        return contents
- 
-    @strawberry.mutation
-    def read_folder(self, folder: FolderInput) -> typing.List[str]:
-        contents = []
-        for file in folder.files:
-            contents.append(file.read().decode())
-        return contents
 
-schema = strawberry.Schema(query=Query, mutation=Mutation)
+schema = strawberry.Schema(
+    query=Query,
+    mutation=Mutation,
+)

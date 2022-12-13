@@ -2,9 +2,10 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
+import { AuthProvider } from "../components/sections/login_AuthContext";
 
 const httpLink = createUploadLink({
-  uri: "http://127.0.0.1:8000/graphql",
+  uri: "http://127.0.0.1:8000/graphql/",
 });
 
 const client = new ApolloClient({
@@ -15,7 +16,9 @@ const client = new ApolloClient({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </ApolloProvider>
   );
 }

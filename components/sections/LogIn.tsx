@@ -2,7 +2,9 @@ import styles from "../../styles/components/SignUp.module.css";
 import Image from "next/image";
 import Sustainee from "../../public/images/Sustainee.png";
 import Plus from "../../public/images/appExplore/plus";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
+import AuthContext from "./login_AuthContext";
+import Cross from "../../public/images/appExplore/cross";
 
 interface Close {
   closeLogIn: any;
@@ -12,16 +14,42 @@ interface Close {
 }
 
 export default function LogIn(Close: Close) {
+  const {
+    LoginUser,
+    styleSubmit,
+    warningBool,
+    warningtext,
+    UpAndIn,
+    setWarningBool,
+  } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (UpAndIn === true) {
+      Close.setUpOrIn(null);
+    }
+  }, [UpAndIn]);
+
   return (
     <div
       className={`${styles.overlay} ${
         Close.hidden === true ? styles.visible : styles.hidden
       }`}
     >
+      <div
+        className={`${styles.warning} ${
+          warningBool === true ? styles.visible : styles.hidden
+        }`}
+      >
+        <Cross className={styles.SVGCrossRed} />
+        <p className={styles.paragraph}>{warningtext}</p>
+      </div>
       <div className={styles.Wrapper}>
         <div
           className={styles.CrossButton}
-          onClick={() => Close.closeLogIn(false)}
+          onClick={() => {
+            Close.closeLogIn(false);
+            setWarningBool(false);
+          }}
         >
           <Plus className={styles.SVGCross} />
         </div>
@@ -32,11 +60,21 @@ export default function LogIn(Close: Close) {
             <p className={styles.paragraph}>
               Access to AI tools, that open up a new door for creativity
             </p>
-            <input type={"text"} required={true} placeholder="Email"></input>
-            <input type={"text"} required={true} placeholder="Password"></input>
-            <div className={styles.Button}>
-              <h5 className={styles.ButtonName}>Sign Up</h5>
-            </div>
+            <form onSubmit={LoginUser} className={styles.forms}>
+              <input
+                name="email"
+                type={"email"}
+                required={true}
+                placeholder="Email"
+              ></input>
+              <input
+                name="password"
+                type={"password"}
+                required={true}
+                placeholder="Password"
+              ></input>
+              <input type="submit" value="Sign in" style={styleSubmit}></input>
+            </form>
             <div className={styles.line}></div>
             <div className={styles.PwithLink}>
               <p className={styles.paragraph}>Don't have an account?</p>
@@ -44,8 +82,9 @@ export default function LogIn(Close: Close) {
                 className={styles.paragraph}
                 style={{ color: "#ea2d49", cursor: "pointer" }}
                 onClick={() => {
-                  Close.setUpOrIn(true);
+                  Close.setUpOrIn("signup");
                   Close.closeSignup(true);
+                  setWarningBool(false);
                 }}
               >
                 Sign Up

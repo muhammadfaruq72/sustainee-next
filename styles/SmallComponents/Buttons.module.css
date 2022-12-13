@@ -1,0 +1,179 @@
+.SimpleButton {
+  margin-left: 60px;
+  width: 145px;
+  height: 41px;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: 250;
+  font-size: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  border-radius: 10px;
+
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.SimpleButton:hover {
+  border: 1px solid rgba(0, 0, 0, 0.99);
+  color: rgba(0, 0, 0, 0.99);
+}
+
+.Button {
+  width: 145px;
+  height: 41px;
+  background: #ea2d49;
+  color: white;
+  font-weight: 250;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  display: grid;
+  align-items: center;
+  margin: 0 auto;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.Button:hover {
+  box-shadow: rgba(234, 45, 73, 0.004) 0px 0.783403px 0.783403px 0px,
+    rgba(234, 45, 73, 0.01) 0px 1.92107px 1.92107px 0px,
+    rgba(234, 45, 73, 0.024) 0px 3.63429px 3.63429px 0px,
+    rgba(234, 45, 73, 0.04) 0px 6.35486px 6.35486px 0px,
+    rgba(234, 45, 73, 0.07) 0px 11.0474px 11.0474px 0px,
+    rgba(234, 45, 73, 0.125) 0px 5.249729px 5.249729px 0px,
+    rgba(234, 45, 73, 0.2) 0px 10px 10px 0px;
+}
+
+.roundSimpleBtn {
+  margin-left: 60px;
+  width: 145px;
+  height: 41px;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: 250;
+  font-size: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  border-radius: 50px;
+
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.roundSimpleBtn:hover {
+  border: 1px solid rgba(0, 0, 0, 0.99);
+  color: rgba(0, 0, 0, 0.99);
+}
+
+.roundBtn {
+  width: 145px;
+  height: 41px;
+  background: #ea2d49;
+  color: white;
+  font-weight: 250;
+  font-size: 20px;
+  border: none;
+  border-radius: 50px;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.roundBtn:hover {
+  box-shadow: rgba(234, 45, 73, 0.004) 0px 0.783403px 0.783403px 0px,
+    rgba(234, 45, 73, 0.01) 0px 1.92107px 1.92107px 0px,
+    rgba(234, 45, 73, 0.024) 0px 3.63429px 3.63429px 0px,
+    rgba(234, 45, 73, 0.04) 0px 6.35486px 6.35486px 0px,
+    rgba(234, 45, 73, 0.07) 0px 11.0474px 11.0474px 0px,
+    rgba(234, 45, 73, 0.125) 0px 5.249729px 5.249729px 0px,
+    rgba(234, 45, 73, 0.2) 0px 10px 10px 0px;
+}
+
+.btnAnimated {
+  background-color: rgba(245, 245, 245, 0.8);
+  border-radius: 16px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  width: 240px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.004) 0px 0.783403px 0.783403px 0px,
+    rgba(0, 0, 0, 0.01) 0px 1.92107px 1.92107px 0px,
+    rgba(0, 0, 0, 0.024) 0px 3.63429px 3.63429px 0px,
+    rgba(0, 0, 0, 0.04) 0px 6.35486px 6.35486px 0px,
+    rgba(0, 0, 0, 0.07) 0px 11.0474px 11.0474px 0px;
+}
+
+.secondSVG {
+  width: 37px;
+  height: 37px;
+  stroke: #ea2d49;
+  transform: translateX(250%);
+  transition: 0.3s ease-out;
+}
+
+.displayNone {
+  display: none;
+}
+
+.displayBlock {
+  display: block;
+}
+
+.firstSVG {
+  width: 37px;
+  height: 37px;
+  stroke: #ea2d49;
+  transition: 0.4s ease-out;
+  margin-left: 47px;
+}
+
+.stroke {
+  stroke: transparent !important;
+}
+
+.strokewhite {
+  stroke: white !important;
+}
+
+.rotation {
+  margin-left: 0px;
+  animation: rotation 2.5s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.btnAnimated:hover .secondSVG {
+  transform: translateX(0%);
+  margin-right: 94px;
+}
+
+.btnAnimated:hover .firstSVG {
+  transform: translateX(-250%);
+}
+
+.textAnimBtn {
+  font-weight: 500;
+  font-size: 28px;
+  color: #ea2d49;
+}
+
+/*
+<div
+  className={styleButton.btnAnimated}
+  style={{ backgroundColor: "#ea2d49" }}
+>
+  <Explore
+    className={`${styleButton.firstSVG} ${styleButton.stroke}`}
+  />
+  <h4 className={styleButton.textAnimBtn} style={{ color: "white" }}>
+    Explore
+  </h4>
+  <Arrow
+    className={`${styleButton.secondSVG} ${styleButton.displayBlock} ${styleButton.strokewhite}`}
+  />
+</div>
+*/
