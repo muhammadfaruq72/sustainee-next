@@ -1,8 +1,8 @@
-import styles from "../../styles/components/SignUp.module.css";
+import styles from "../../../styles/components/SignUp.module.css";
 import Image from "next/image";
-import Sustainee from "../../public/images/Sustainee.png";
-import Plus from "../../public/images/appExplore/plus";
-import Cross from "../../public/images/appExplore/cross";
+import Sustainee from "../../../public/images/Sustainee.png";
+import Plus from "../../../public/images/appExplore/plus";
+import Cross from "../../../public/images/appExplore/cross";
 import { useRef, useState, useEffect, useContext } from "react";
 import { gql, useMutation } from "@apollo/client";
 import AuthContext from "./login_AuthContext";

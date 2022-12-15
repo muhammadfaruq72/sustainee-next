@@ -1,9 +1,9 @@
 import styles from "../styles/Header.module.css";
 import styleButton from "../styles/SmallComponents/Buttons.module.css";
-import SignUp from "./sections/SignUp";
+import SignUp from "./sections/Global/SignUp";
 import LogIn from "./sections/LogIn";
 import { useContext, useEffect, useState } from "react";
-import AuthContext from "./sections/login_AuthContext";
+import AuthContext from "./sections/Global/login_AuthContext";
 import User from "../public/images/appExplore/user";
 import Link from "next/link";
 
@@ -43,11 +43,11 @@ export default function Header() {
       <header className={styles.HeaderTag}>
         <div className={styles.Wrapper}>
           <Link href="/">
-            <img src="../images/LogoSustainee.png" />
+            <img src="../images/LogoSustainee.png" className={styles.logo} />
           </Link>
           <div
             onClick={LogOutUser}
-            className={`${
+            className={`${styles.userParent} ${
               isloggedIn === true ? styles.visible : styles.hidden
             }`}
           >

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import styles from "../../styles/components/AppExplore.module.css";
-import styleButton from "../../styles/SmallComponents/Buttons.module.css";
+import styles from "../../../styles/components/IntroSection/Square.module.css";
+import styleButton from "../../../styles/SmallComponents/Buttons.module.css";
 
 interface props {
   title: string;
@@ -10,7 +10,7 @@ interface props {
   link: string;
 }
 
-export default function AppsExplore(props: props) {
+export default function Square(props: props) {
   const { title, subtitle, image, link } = props;
   return (
     <div className={styles.Wrapper}>

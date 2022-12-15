@@ -1,43 +1,66 @@
 .Wrapper {
-  max-width: 490px;
-  min-height: 490px;
-  padding: 12px;
+  max-width: 1018px;
+  min-height: auto;
+  padding: 30px 120px;
+  margin-top: 30px;
   background: #f5f5f5;
   border-radius: 19px;
+}
+@media (max-width: 1018px) {
+  .Wrapper {
+    display: block;
+    max-width: 490px;
+    min-height: auto;
+    padding: 30px 10px;
+  }
 }
 
 .ContentWrapper {
   display: grid;
-  gap: 20px;
+  grid-template-columns: 254px auto;
+  gap: 70px;
+  align-items: center;
+}
+@media (max-width: 1018px) {
+  .ContentWrapper {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 17px;
+  }
 }
 
 .Image {
-  max-width: 250px;
-  height: 288.76px;
-  margin: 0 auto;
+  max-width: 254px;
   transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+@media (max-width: 1018px) {
+  .Image {
+    margin: 0 auto;
+  }
 }
 
 .Image:hover {
   transform: translateY(-10px);
 }
 
-.Title {
-  font-weight: 600;
-  font-size: 20px;
-  margin: 0 auto;
+.HoriWrapper {
+  display: grid;
+  gap: 20px;
+}
 
-  @media (max-width: 450px) {
-    font-size: calc(16.5px + (60 - 35) * ((100vw - 250px) / (1600 - 250)));
-  }
+.Title {
+  margin: 0 auto;
+  text-align: center;
+  font-weight: 600;
+  font-size: clamp(15px, 1.6vw, 35px);
 }
 
 .Subtitle {
   margin: 0 auto;
   text-align: center;
-  font-size: 15px;
-  line-height: 140%;
   color: rgba(0, 0, 0, 0.74);
+  font-size: clamp(13px, 1.4vw, 35px);
+  line-height: 140%;
 }
 
 .Button {
@@ -61,7 +84,7 @@
 }
 
 .ButtonName {
-  font-size: 20px;
   color: white;
   font-weight: 250;
+  font-size: 20px;
 }

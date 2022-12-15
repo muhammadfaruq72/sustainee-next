@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "../../styles/components/AppsExploreHori.module.css";
-import styleButton from "../../styles/SmallComponents/Buttons.module.css";
+import styles from "../../../styles/components/IntroSection/Rectangle.module.css";
+import styleButton from "../../../styles/SmallComponents/Buttons.module.css";
 
 interface props {
   title: string;
@@ -8,7 +8,7 @@ interface props {
   image: string;
 }
 
-export default function AppsExploreHori(props: props) {
+export default function Rectangle(props: props) {
   const { title, subtitle, image } = props;
   return (
     <div className={styles.Wrapper}>

@@ -1,6 +1,7 @@
 .Wrapper {
   background: #fff;
   overflow: hidden;
+  margin-top: 60px;
 }
 
 .ContentWrapper {
@@ -16,8 +17,9 @@
   margin: 0 auto;
   display: grid;
   gap: 15px;
-
-  @media (max-width: 450px) {
+}
+@media (max-width: 450px) {
+  .TextWrapper {
     max-width: 370px;
   }
 }
@@ -26,23 +28,21 @@
   color: black;
   margin: 0 auto;
   font-weight: 600;
-  font-size: 30px;
-
-  @media (max-width: 450px) {
-    font-size: calc(16.5px + (60 - 35) * ((100vw - 250px) / (1600 - 250)));
-  }
+  font-size: clamp(18px, 2.6vw, 35px);
 }
 
 .Description {
   color: rgba(0, 0, 0, 0.55);
-  font-size: 30px;
-  font-weight: 400;
+  font-size: clamp(13px, 2.3vw, 35px);
+  font-weight: 300;
   margin: 0 auto;
   line-height: 110%;
   text-align: center;
+}
 
-  @media (max-width: 450px) {
-    font-size: calc(12.5px + (40 - 35) * ((100vw - 250px) / (1600 - 250)));
+@media screen and (450px < width <= 1024px) {
+  .Description {
+    max-width: 80%;
   }
 }
 
@@ -56,8 +56,9 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 520px 520px;
-
-  @media (max-width: 1018px) {
+}
+@media (max-width: 1018px) {
+  .AppsWrapper {
     grid-template-columns: auto;
     gap: 30px;
   }

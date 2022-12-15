@@ -1,7 +1,7 @@
 import React from "react";
-import AppsExplore from "./AppsExplore";
-import AppsExploreHori from "./AppsExploreHori";
-import styles from "../../styles/components/IntroSections.module.css";
+import Square from "./Square";
+import Rectangle from "./Rectangle";
+import styles from "../../../styles/components/IntroSection/IntroSections.module.css";
 
 export default function IntroSection() {
   return (
@@ -16,14 +16,14 @@ export default function IntroSection() {
         </div>
         <div className={styles.AppsWrapperHori}>
           <div className={styles.AppsWrapper}>
-            <AppsExplore
+            <Square
               title="AI Image Background Remover"
               subtitle="Our app gives you the chance to shine against completely clear photo
         backgrounds."
               image="../../images/appExplore/bgRemove.png"
               link="/BackgroundRemover"
             />
-            <AppsExplore
+            <Square
               title="AI Image Upscaler"
               subtitle="Sustainee Image upscaler can improve image quality
           using advanced AI models."
@@ -31,7 +31,7 @@ export default function IntroSection() {
               link="/"
             />
           </div>
-          <AppsExploreHori
+          <Rectangle
             title="AI Paraphraser Tool, Rewrite Any Text"
             subtitle="A paraphrase must provide the same information as
             the original and be written in your own word

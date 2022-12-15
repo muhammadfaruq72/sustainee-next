@@ -91,6 +91,7 @@
   gap: 10px;
   padding: 10px;
   width: 240px;
+  height: 61px;
   cursor: pointer;
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.004) 0px 0.783403px 0.783403px 0px,
@@ -121,7 +122,7 @@
   height: 37px;
   stroke: #ea2d49;
   transition: 0.4s ease-out;
-  margin-left: 47px;
+  margin-left: 37px;
 }
 
 .stroke {
@@ -133,7 +134,7 @@
 }
 
 .rotation {
-  margin-left: 0px;
+  margin-left: 7px;
   animation: rotation 2.5s infinite linear;
 }
 
@@ -148,7 +149,7 @@
 
 .btnAnimated:hover .secondSVG {
   transform: translateX(0%);
-  margin-right: 94px;
+  margin-right: 74px;
 }
 
 .btnAnimated:hover .firstSVG {
@@ -161,6 +162,95 @@
   color: #ea2d49;
 }
 
+@media (max-width: 450px) {
+  .btnAnimated {
+    width: 175px;
+  }
+  .secondSVG {
+    width: 25px;
+    height: 25px;
+  }
+  .firstSVG {
+    width: 25px;
+    height: 25px;
+  }
+  .textAnimBtn {
+    font-size: 22px;
+  }
+}
+
+@media only screen and (min-width: 450px) {
+  .mobileOnly {
+    display: none !important;
+  }
+}
+
+.HStackBtn {
+  display: grid;
+  grid-template-columns: 175px auto auto;
+  gap: 10px;
+}
+@media only screen and (min-width: 450px) {
+  .HStackBtn {
+    display: none;
+  }
+}
+
+@media (max-width: 320px) {
+  .btnAnimated {
+    width: 145px;
+  }
+  .secondSVG {
+    width: 22px;
+    height: 22px;
+  }
+  .firstSVG {
+    width: 22px;
+    height: 22px;
+  }
+  .textAnimBtn {
+    font-size: 18px;
+  }
+  .HStackBtn {
+    grid-template-columns: 145px auto auto;
+  }
+}
+.deleteBtn {
+  display: grid;
+  border-radius: 16px;
+  background-color: rgba(245, 245, 245, 0.8);
+  max-width: 195px;
+  width: 100%;
+  height: 61px;
+  box-shadow: rgba(0, 0, 0, 0.004) 0px 0.783403px 0.783403px 0px,
+    rgba(0, 0, 0, 0.01) 0px 1.92107px 1.92107px 0px,
+    rgba(0, 0, 0, 0.024) 0px 3.63429px 3.63429px 0px,
+    rgba(0, 0, 0, 0.04) 0px 6.35486px 6.35486px 0px,
+    rgba(0, 0, 0, 0.07) 0px 11.0474px 11.0474px 0px;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.deleteBtn:hover {
+  transform: scale(1.1);
+}
+
+.saveBtn {
+  display: grid;
+  border-radius: 16px;
+  background-color: rgba(245, 245, 245, 0.8);
+  max-width: 195px;
+  width: 100%;
+  height: 61px;
+  box-shadow: rgba(0, 0, 0, 0.004) 0px 0.783403px 0.783403px 0px,
+    rgba(0, 0, 0, 0.01) 0px 1.92107px 1.92107px 0px,
+    rgba(0, 0, 0, 0.024) 0px 3.63429px 3.63429px 0px,
+    rgba(0, 0, 0, 0.04) 0px 6.35486px 6.35486px 0px,
+    rgba(0, 0, 0, 0.07) 0px 11.0474px 11.0474px 0px;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.saveBtn:hover {
+  transform: scale(1.1);
+}
 /*
 <div
   className={styleButton.btnAnimated}
