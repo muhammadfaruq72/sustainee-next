@@ -6,8 +6,10 @@ from io import BytesIO
 import base64
 from .stickerinator.stickerinator import stickerinator
 from .u2net.u2net_engine import remove_bg as u2net
-
-from .Types import Background, SignUp, SignUpInput, SignUpPartialInput, SignUpFilter
+import ddddsr
+import cv2
+import os
+from .Types import Background,Upscaler, SignUp, SignUpInput, SignUpPartialInput, SignUpFilter
 from strawberry_django import mutations
 import strawberry
 from strawberry.file_uploads import Upload
@@ -18,6 +20,7 @@ from gqlauth.core.types_ import GQLAuthError
 from gqlauth.user import arg_mutations
 from gqlauth.user.queries import UserQueries
 from gqlauth.user.resolvers import Captcha
+
 
 
 @strawberry.type
@@ -110,6 +113,33 @@ class Mutation:
              
         #return Background(imageFile=f"http://127.0.0.1:8000/static/media/{fileName[0]}.png")
         return Background(name=str(file), imageFile=output)
+
+    @strawberry.mutation
+    def Upscaler(self, file: Upload, model: str, scale: float) -> Upscaler:
+        print(file, model, scale)
+        output_path = f'{BASE_DIR}/static/media/{str(file)}'
+        input = Image.open(file)
+        input.save(output_path)
+        sr = ddddsr.SR(
+            # models: currently supports ['waifu2x_art', 'waifu2x_photo']
+            model = model, 
+            # scale
+            scale = scale, 
+            # denoise level: range in [-1, 3], -1 means no denoising.
+            denoise_level =  2,
+        )(output_path)
+        os.remove(output_path)
+
+        sr = cv2.cvtColor(sr, cv2.COLOR_BGR2RGB)
+        output = Image.fromarray(sr.astype('uint8'), 'RGB')
+
+        bytesIO = BytesIO()
+        output.save(bytesIO, format="png")
+        im_bytes = bytesIO.getvalue()
+        output = base64.b64encode(im_bytes)
+        output = output.decode("utf-8")
+             
+        return Upscaler(name=str(file), imageFile=output)
 
 
 schema = strawberry.Schema(

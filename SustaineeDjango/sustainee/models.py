@@ -5,6 +5,9 @@ import django
 class Background(models.Model):
     name = models.CharField(max_length=500)
     imageFile = models.CharField(max_length=500)
+class Upscaler(models.Model):
+    name = models.CharField(max_length=500)
+    imageFile = models.CharField(max_length=500)
 
 class SignUp(models.Model):
     id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')

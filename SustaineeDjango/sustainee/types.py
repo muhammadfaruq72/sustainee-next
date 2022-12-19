@@ -9,6 +9,11 @@ class Background:
   name: auto
   imageFile: auto
 
+@strawberry.django.type(models.Upscaler)
+class Upscaler:
+  name: auto
+  imageFile: auto
+
 @strawberry.django.filters.filter(models.SignUp, lookups=True)
 class SignUpFilter:
     id: auto

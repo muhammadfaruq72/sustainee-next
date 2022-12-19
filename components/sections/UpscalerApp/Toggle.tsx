@@ -20,20 +20,26 @@ export default function Toggle(Props: props) {
       >
         <span
           className={`${styles.glider} ${
-            Props.gliderState === "U2net" ? styles.glider0 : styles.glider1
+            Props.gliderState === "waifu2x_photo"
+              ? styles.glider0
+              : styles.glider1
           }`}
         ></span>
-        <div className={styles.ToggleButton} id="U2net" onClick={Props.glider}>
+        <div
+          className={styles.ToggleButton}
+          id="waifu2x_photo"
+          onClick={Props.glider}
+        >
           <Props.FirstSVG
             className={`${styles.SVGPicture} ${
-              Props.gliderState === "U2net"
+              Props.gliderState === "waifu2x_photo"
                 ? styles.strokeWhite
                 : styles.strokeGrey
             }`}
           />
           <h5
             className={`${
-              Props.gliderState === "U2net"
+              Props.gliderState === "waifu2x_photo"
                 ? styles.glidertextWhite
                 : styles.glidertextRed
             }`}
@@ -43,19 +49,19 @@ export default function Toggle(Props: props) {
         </div>
         <div
           className={styles.ToggleButton}
-          id="Stickerinator"
+          id="waifu2x_art"
           onClick={Props.glider}
         >
           <Props.SecondSVG
             className={`${styles.SVGCube} ${
-              Props.gliderState === "Stickerinator"
+              Props.gliderState === "waifu2x_art"
                 ? styles.strokeWhite
                 : styles.strokeGrey
             }`}
           />
           <h5
             className={`${
-              Props.gliderState === "Stickerinator"
+              Props.gliderState === "waifu2x_art"
                 ? styles.glidertextWhite
                 : styles.glidertextRed
             }`}

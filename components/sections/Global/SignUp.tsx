@@ -89,6 +89,7 @@ export default function SignUp(Close: Close) {
 
   return (
     <div
+      onClick={() => Close.closeSignup(false)}
       className={`${styles.overlay} ${
         Close.hidden === true ? styles.visible : styles.hidden
       }`}
@@ -102,7 +103,7 @@ export default function SignUp(Close: Close) {
         <p className={styles.paragraph}>{warningtext}</p>
       </div>
 
-      <div className={styles.Wrapper}>
+      <div onClick={(e: any) => e.stopPropagation()} className={styles.Wrapper}>
         <div
           className={styles.CrossButton}
           onClick={() => Close.closeSignup(false)}

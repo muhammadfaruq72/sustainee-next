@@ -6,6 +6,8 @@ import { saveAs } from "file-saver";
 
 interface typeContext {
   gliderState?: any;
+  setOption?: any;
+  Option?: any;
   glider?: any;
   onStartButton?: any;
   StartBoolean?: any;
@@ -24,12 +26,22 @@ interface typeContext {
 const Context = createContext<typeContext>({});
 export default Context;
 
-function MUTATION(gliderState: any) {
+function MUTATION(gliderState: any, Option: any) {
   var MUTATION: any;
-  if (gliderState === "U2net") {
+  if (gliderState === "waifu2x_photo" && Option === "2x") {
     MUTATION = `
           mutation ($file: Upload!) {
-            U2net(file: $file) {
+            Upscaler(file: $file, model: "waifu2x_photo", scale: 1.5) {
+              name
+              imageFile
+            }
+          }
+        `;
+  }
+  if (gliderState === "waifu2x_photo" && Option === "3x") {
+    MUTATION = `
+          mutation ($file: Upload!) {
+            Upscaler(file: $file, model: "waifu2x_photo", scale: 2.0) {
               name
               imageFile
             }
@@ -37,16 +49,27 @@ function MUTATION(gliderState: any) {
         `;
   }
 
-  if (gliderState === "Stickerinator") {
+  if (gliderState === "waifu2x_art" && Option === "2x") {
     MUTATION = `
           mutation ($file: Upload!) {
-            Stickerinator(file: $file) {
+            Upscaler(file: $file, model: "waifu2x_art", scale: 1.5) {
               name
               imageFile
             }
           }
         `;
   }
+  if (gliderState === "waifu2x_art" && Option === "3x") {
+    MUTATION = `
+          mutation ($file: Upload!) {
+            Upscaler(file: $file, model: "waifu2x_art", scale: 2.0) {
+              name
+              imageFile
+            }
+          }
+        `;
+  }
+
   MUTATION = gql`
     ${MUTATION}
   `;
@@ -56,18 +79,18 @@ function MUTATION(gliderState: any) {
 const contentType = "image/png";
 var blob;
 var name: any;
-function ResponseData(data: any, Model: any, setSelectedImages: any) {
+function ResponseData(data: any, setSelectedImages: any) {
   blob = base64StringToBlob(data.imageFile, contentType);
   name = data.name;
   const blobImage = URL.createObjectURL(blob);
   setSelectedImages((current: any) =>
     current.map((obj: any) => {
-      if (obj.Imagename === name && Model === "U2net") {
-        return { ...obj, U2net: blobImage };
+      if (obj.Imagename === name) {
+        return { ...obj, UpscaledImage: blobImage };
       }
-      if (obj.Imagename === name && Model === "Stickerinator") {
-        return { ...obj, Stickerinator: blobImage };
-      }
+      // if (obj.Imagename === name && Model === "waifu2x_art") {
+      //   return { ...obj, waifu2x_art: blobImage };
+      // }
       return obj;
     })
   );
@@ -84,8 +107,7 @@ interface File {
 interface ImagesOBJ {
   Imagename?: string;
   originalImage: string;
-  U2net?: string;
-  Stickerinator?: string;
+  UpscaledImage?: string;
 }
 
 var waitForMutate: Boolean = true;
@@ -102,21 +124,24 @@ interface dragFilestype {
   Files?: any;
 }
 
-export const WorkingAppProvider = ({ children }: Props) => {
+export const UpscalerProvider = ({ children }: Props) => {
   const [selectedImages, setSelectedImages] = useState(Array<ImagesOBJ>);
   const [selectedFilesArray, setSelectedFilesArray] = useState<File[]>([]);
-  const [gliderState, setGlider] = useState("U2net");
+  const [gliderState, setGlider] = useState("waifu2x_photo");
+  const [Option, setOption] = useState("2x");
   const [StartBoolean, setStartBoolean] = useState(false);
   const [dragStyle, setDragStyle] = useState<{ border?: any }>({});
+
   const [mutate, { loading, error, data: mutateResponse }] = useMutation(
-    MUTATION(gliderState),
+    MUTATION(gliderState, Option),
     {
       onCompleted(data) {
-        if (gliderState === "U2net") {
-          ResponseData(data.U2net, "U2net", setSelectedImages);
-        } else {
-          ResponseData(data.Stickerinator, "Stickerinator", setSelectedImages);
-        }
+        ResponseData(data.Upscaler, setSelectedImages);
+        // if (gliderState === "waifu2x_photo") {
+        //   ResponseData(data.Upscaler, "waifu2x_photo", setSelectedImages);
+        // } else {
+        //   ResponseData(data.Upscaler, "waifu2x_art", setSelectedImages);
+        // }
         waitForMutate = true;
         waitForRes = waitForRes + 1;
       },
@@ -186,23 +211,23 @@ export const WorkingAppProvider = ({ children }: Props) => {
   ) {
     startTriggered = true;
     var zero = 0;
-    var one = 0;
+    //var one = 0;
     for (let i = 0; i < selectedImages.length; i++) {
-      if (typeof selectedImages[i].U2net === "undefined") {
+      if (typeof selectedImages[i].UpscaledImage === "undefined") {
         zero = zero + 1;
       }
-      if (typeof selectedImages[i].Stickerinator === "undefined") {
-        one = one + 1;
-      }
-      //console.log("zero", zero, "one", one);
+      // if (typeof selectedImages[i].waifu2x_art === "undefined") {
+      //   one = one + 1;
+      // }
+      console.log("zero", zero);
     }
 
     try {
       for (let i = 0; i < selectedFilesArray.length; i++) {
         //console.log("selectedImages Unet", selectedImages[i], selectedImages);
         if (
-          gliderState === "U2net" &&
-          typeof selectedImages[i].U2net === "undefined"
+          // gliderState === "waifu2x_photo" &&
+          typeof selectedImages[i].UpscaledImage === "undefined"
         ) {
           if (waitForRes >= selectedFilesArray.length + 1) {
             waitForRes = selectedFilesArray.length - zero;
@@ -219,24 +244,24 @@ export const WorkingAppProvider = ({ children }: Props) => {
           }
         }
 
-        if (
-          gliderState === "Stickerinator" &&
-          typeof selectedImages[i].Stickerinator === "undefined"
-        ) {
-          if (waitForRes >= selectedFilesArray.length + 1) {
-            waitForRes = selectedFilesArray.length - one;
-            waitForRes = waitForRes + 1;
-            //console.log("At one waitForRes", waitForRes);
-          }
-          await pWaitFor(() => waitForMutate == true);
-          var file = selectedFilesArray[i];
+        // if (
+        //   gliderState === "waifu2x_art" &&
+        //   typeof selectedImages[i].UpscaledImage === "undefined"
+        // ) {
+        //   if (waitForRes >= selectedFilesArray.length + 1) {
+        //     waitForRes = selectedFilesArray.length - zero;
+        //     waitForRes = waitForRes + 1;
+        //     //console.log("At one waitForRes", waitForRes);
+        //   }
+        //   await pWaitFor(() => waitForMutate == true);
+        //   var file = selectedFilesArray[i];
 
-          mutate({ variables: { file } });
-          waitForMutate = false;
-          if (i == selectedFilesArray.length - 1) {
-            await pWaitFor(() => waitForRes == selectedFilesArray.length + 1);
-          }
-        }
+        //   mutate({ variables: { file } });
+        //   waitForMutate = false;
+        //   if (i == selectedFilesArray.length - 1) {
+        //     await pWaitFor(() => waitForRes == selectedFilesArray.length + 1);
+        //   }
+        // }
       }
     } catch (err) {
       alert(err);
@@ -244,6 +269,10 @@ export const WorkingAppProvider = ({ children }: Props) => {
   }
 
   const onStartButton = () => {
+    selectedImages.forEach((object) => {
+      delete object["UpscaledImage"];
+    });
+
     setStartBoolean(true);
 
     if (startTriggered === true) {
@@ -264,10 +293,10 @@ export const WorkingAppProvider = ({ children }: Props) => {
   let SaveImages = async () => {
     var Object: any;
     for (const object of selectedImages) {
-      if (gliderState === "U2net") {
-        Object = object.U2net;
+      if (gliderState === "waifu2x_photo") {
+        Object = object.UpscaledImage;
       } else {
-        Object = object.Stickerinator;
+        Object = object.UpscaledImage;
       }
       if (typeof Object !== "undefined") {
         console.log(Object, `${object.Imagename?.split(".")[0]}.png`);
@@ -279,6 +308,8 @@ export const WorkingAppProvider = ({ children }: Props) => {
 
   let contextData = {
     gliderState: gliderState,
+    Option: Option,
+    setOption: setOption,
     glider: glider,
     onStartButton: onStartButton,
     StartBoolean: StartBoolean,

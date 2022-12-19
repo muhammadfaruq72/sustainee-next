@@ -22,19 +22,18 @@ export default function ImageBox(Props: props) {
       <div className={styles.BoxWrapper} style={Props.dragStyle}>
         <div className={styles.AddedImages}>
           {Props.selectedImages &&
-            Props.gliderState === "U2net" &&
             Props.selectedImages.map((Image: any, index: any) => (
               <div className={styles.ImagesContainer} key={index}>
                 <div className={`ImageBorder ${styles.ImageBorder}`}>
                   <style jsx>{`
                     .ImageBorder {
-                      padding: ${typeof Image.U2net !== "undefined"
+                      padding: ${typeof Image.UpscaledImage !== "undefined"
                         ? "0px"
                         : "2px"};
                     }
 
                     .ImageBorder::before {
-                      display: ${typeof Image.U2net !== "undefined" ||
+                      display: ${typeof Image.UpscaledImage !== "undefined" ||
                       Props.StartBoolean !== true
                         ? "none"
                         : "block"};
@@ -48,64 +47,8 @@ export default function ImageBox(Props: props) {
                   <img
                     className={styles.Image}
                     src={
-                      typeof Image.U2net !== "undefined"
-                        ? Image.U2net
-                        : Image.originalImage
-                    }
-                    key={index}
-                    ref={(event) => {
-                      Props.handleSize(event);
-                    }}
-                    //onLoad={(image) => handleSize(image)}
-                  ></img>
-                </div>
-                <div
-                  className={styles.CrossButton}
-                  onClick={() => {
-                    Props.setSelectedImages(
-                      Props.selectedImages.filter((e: any) => e !== Image)
-                    );
-                    Props.setSelectedFilesArray(
-                      Props.selectedFilesArray.filter(
-                        (e: any) => e.name !== Image.Imagename
-                      )
-                    );
-                  }}
-                >
-                  <Plus className={styles.SVGCross} />
-                </div>
-              </div>
-            ))}
-
-          {Props.selectedImages &&
-            Props.gliderState === "Stickerinator" &&
-            Props.selectedImages.map((Image: any, index: any) => (
-              <div className={styles.ImagesContainer} key={index}>
-                <div className={`ImageBorder ${styles.ImageBorder}`}>
-                  <style jsx>{`
-                    .ImageBorder {
-                      padding: ${typeof Image.Stickerinator !== "undefined"
-                        ? "0px"
-                        : "2px"};
-                    }
-
-                    .ImageBorder::before {
-                      display: ${typeof Image.Stickerinator !== "undefined" ||
-                      Props.StartBoolean !== true
-                        ? "none"
-                        : "block"};
-                    }
-
-                    .ImageBorder::after {
-                      background-image: url(${back.src});
-                    }
-                  `}</style>
-
-                  <img
-                    className={styles.Image}
-                    src={
-                      typeof Image.Stickerinator !== "undefined"
-                        ? Image.Stickerinator
+                      typeof Image.UpscaledImage !== "undefined"
+                        ? Image.UpscaledImage
                         : Image.originalImage
                     }
                     key={index}

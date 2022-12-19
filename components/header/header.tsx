@@ -1,17 +1,28 @@
-import styles from "../styles/Header.module.css";
-import styleButton from "../styles/SmallComponents/Buttons.module.css";
-import SignUp from "./sections/Global/SignUp";
-import LogIn from "./sections/LogIn";
-import { useContext, useEffect, useState } from "react";
-import AuthContext from "./sections/Global/login_AuthContext";
-import User from "../public/images/appExplore/user";
+import styles from "../../styles/Header.module.css";
+import styleButton from "../../styles/SmallComponents/Buttons.module.css";
+import SignUp from "../sections/Global/SignUp";
+import LogIn from "../sections/Global/LogIn";
+import { useContext, useEffect, useState, useRef } from "react";
+import AuthContext from "../sections/Global/login_AuthContext";
+import User from "../../public/images/appExplore/user";
 import Link from "next/link";
+import Menu from "./Menu";
 
 export default function Header() {
   const [openSignUp, setSignUp] = useState<Boolean>(false);
   const [openLogIn, setLogIn] = useState<Boolean>(false);
   const [UpOrIn, setUpOrIn] = useState<null | string>(null);
   const { isloggedIn, LogOutUser } = useContext(AuthContext);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const HamburgerRef: any = useRef();
+  const signUpOnClick: any = () => {
+    setSignUp(true);
+    setUpOrIn("signup");
+  };
+  const LogInOnCluck: any = () => {
+    setLogIn(true);
+    setUpOrIn("login");
+  };
 
   useEffect(() => {
     if (localStorage.getItem("loginRequired") && UpOrIn === null) {
@@ -53,7 +64,6 @@ export default function Header() {
           >
             <User className={styles.SVGUser} />
           </div>
-
           <div
             className={`${styles.ButtonWrapper} ${
               isloggedIn === false ? styles.visible : styles.hidden
@@ -62,26 +72,33 @@ export default function Header() {
             <button
               type="button"
               className={styleButton.roundSimpleBtn}
-              onClick={() => {
-                setLogIn(true);
-                setUpOrIn("login");
-              }}
+              onClick={LogInOnCluck}
             >
               Sign in
             </button>
             <button
               type="button"
               className={styleButton.roundBtn}
-              onClick={() => {
-                setSignUp(true);
-                setUpOrIn("signup");
-              }}
+              onClick={signUpOnClick}
             >
               Sign up
             </button>
           </div>
-
-          <img className={styles.Hamburger} src="../images/hamburger.png"></img>
+          <img
+            onClick={() => setMenuIsOpen(!menuIsOpen)}
+            ref={HamburgerRef}
+            className={`${styles.Hamburger} ${
+              isloggedIn === false ? styles.visible : styles.hidden
+            }`}
+            src="../images/hamburger.png"
+          ></img>{" "}
+          <Menu
+            signUpOnClick={signUpOnClick}
+            LogInOnCluck={LogInOnCluck}
+            menuIsOpen={menuIsOpen}
+            setMenuIsOpen={setMenuIsOpen}
+            HamburgerRef={HamburgerRef}
+          />
         </div>
       </header>
     </>

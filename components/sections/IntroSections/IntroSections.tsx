@@ -28,7 +28,7 @@ export default function IntroSection() {
               subtitle="Sustainee Image upscaler can improve image quality
           using advanced AI models."
               image="../../images/appExplore/upscaler.png"
-              link="/"
+              link="/Upscaler"
             />
           </div>
           <Rectangle

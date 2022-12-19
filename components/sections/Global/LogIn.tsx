@@ -1,11 +1,10 @@
-import styles from "../../styles/components/SignUp.module.css";
+import styles from "../../../styles/components/SignUp.module.css";
 import Image from "next/image";
-import Sustainee from "../../public/images/Sustainee.png";
-import Plus from "../../public/images/appExplore/plus";
-import { useEffect, useState, useContext, useRef } from "react";
-import AuthContext from "./Global/login_AuthContext";
-import Cross from "../../public/images/appExplore/cross";
-import Context from "./BGApp/BGApp_";
+import Sustainee from "../../../public/images/Sustainee.png";
+import Plus from "../../../public/images/appExplore/plus";
+import { useEffect, useContext } from "react";
+import AuthContext from "./login_AuthContext";
+import Cross from "../../../public/images/appExplore/cross";
 
 interface Close {
   closeLogIn: any;
@@ -32,6 +31,10 @@ export default function LogIn(Close: Close) {
 
   return (
     <div
+      onClick={() => {
+        Close.closeLogIn(false);
+        setWarningBool(false);
+      }}
       className={`${styles.overlay} ${
         Close.hidden === true ? styles.visible : styles.hidden
       }`}
@@ -51,7 +54,10 @@ export default function LogIn(Close: Close) {
           height: "100%",
         }}
       >
-        <div className={styles.Wrapper}>
+        <div
+          onClick={(e: any) => e.stopPropagation()}
+          className={styles.Wrapper}
+        >
           <div
             className={styles.CrossButton}
             onClick={() => {
@@ -64,7 +70,7 @@ export default function LogIn(Close: Close) {
           <div className={styles.ContentWrapper}>
             <Image className={styles.Image} src={Sustainee} alt="" />
             <div className={styles.SignUpWrapper}>
-              <h2 style={{ fontSize: "36px", fontWeight: "700" }}>Sign in</h2>
+              <h2 style={{ fontSize: "36px", fontWeight: "700" }}>Log in</h2>
               <p className={styles.paragraph}>
                 Access to AI tools, that open up a new door for creativity
               </p>

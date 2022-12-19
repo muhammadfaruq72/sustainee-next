@@ -37,6 +37,7 @@
 }
 
 .Wrapper {
+  position: relative;
   margin: 0 auto;
   max-width: 48.75rem;
   height: 3.5rem;
@@ -112,7 +113,7 @@
   display: block;
 }
 
-@media (max-width: 450px) {
+/* @media (max-width: 450px) {
   .userParent {
     display: none;
   }
@@ -121,4 +122,55 @@
   .userParent {
     display: none;
   }
+} */
+
+.Menu {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  padding: 15px 50px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.004) 0px 0.783403px 0.783403px 0px,
+    rgba(0, 0, 0, 0.01) 0px 1.92107px 1.92107px 0px,
+    rgba(0, 0, 0, 0.024) 0px 3.63429px 3.63429px 0px,
+    rgba(0, 0, 0, 0.04) 0px 6.35486px 6.35486px 0px,
+    rgba(0, 0, 0, 0.07) 0px 11.0474px 11.0474px 0px;
+  right: 0;
+  top: 4rem;
+  display: grid;
+  grid-template-rows: auto;
+  gap: 10px;
+  animation: fade-in linear 0.5s 1 normal forwards !important;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.MenuItem {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  cursor: pointer;
+}
+
+.MenuItem:hover {
+  transform: scale(1.1);
+}
+
+.Divider {
+  width: 123px;
+  height: 0px;
+  margin-top: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.09);
 }

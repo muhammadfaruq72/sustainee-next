@@ -17,7 +17,11 @@ export default function Rectangle(props: props) {
         <div className={styles.HoriWrapper}>
           <h5 className={styles.Title}>{title}</h5>
           <p className={styles.Subtitle}>{subtitle}</p>
-          <button type="button" className={styleButton.Button}>
+          <button
+            onClick={() => alert("COMING SOON")}
+            type="button"
+            className={styleButton.Button}
+          >
             Explore
           </button>
         </div>

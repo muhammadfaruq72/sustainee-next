@@ -1,16 +1,16 @@
 import React from "react";
 import Footer from "../components/footer";
 import Header from "../components/header/header";
-import WorkingApp from "../components/sections/BGApp/BGApp";
-import { WorkingAppProvider } from "../components/sections/BGApp/BGApp_";
+import Upscaler from "../components/sections/UpscalerApp/Upscaler";
+import { UpscalerProvider } from "../components/sections/UpscalerApp/Upscaler_";
 
 export default function BackgroundRemover() {
   return (
     <>
       <Header />
-      <WorkingAppProvider>
-        <WorkingApp />
-      </WorkingAppProvider>
+      <UpscalerProvider>
+        <Upscaler />
+      </UpscalerProvider>
       <Footer />
     </>
   );

@@ -67,7 +67,7 @@
 .Stack {
   width: 100%;
   display: grid;
-  grid-template-columns: 346px auto;
+  grid-template-columns: 346px auto auto;
   justify-content: center;
   align-items: start;
   gap: 20px;
@@ -126,7 +126,7 @@
   border-radius: 50px;
   display: grid;
   grid-template-columns: auto auto;
-  gap: 8px;
+  gap: 3px;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -134,12 +134,12 @@
 }
 
 .SVGPicture {
-  width: 25px;
+  width: 24px;
   height: auto;
 }
 
 .SVGCube {
-  width: 25px;
+  width: 24px;
   height: auto;
 }
 
@@ -154,18 +154,35 @@
 .glidertextRed {
   color: #ea2d49;
   font-weight: 250;
-  font-size: 20px;
+  font-size: 19px;
 }
 
 .glidertextWhite {
   color: white;
   font-weight: 250;
-  font-size: 20px;
+  font-size: 19px;
+}
+
+@media (max-width: 350px) {
+  .glidertextRed {
+    font-size: 15px;
+  }
+  .glidertextWhite {
+    font-size: 15px;
+  }
+  .SVGPicture {
+    width: 20px;
+    height: auto;
+  }
+
+  .SVGCube {
+    width: 20px;
+    height: auto;
+  }
 }
 
 .BoxWrapper {
   background-color: rgba(245, 245, 245, 0.8);
-  box-shadow: 0px 3px 30px 0px rgba(0, 0, 0, 0.1);
   border-radius: 19px;
   width: 100%;
   min-height: 515px;

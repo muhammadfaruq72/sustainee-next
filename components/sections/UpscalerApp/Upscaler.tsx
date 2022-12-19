@@ -5,14 +5,15 @@ import Cube from "../../../public/images/appExplore/cube";
 import PictureSVG from "../../../public/images/appExplore/picture";
 import Process from "../../../public/images/appExplore/process";
 import Arrow from "../../../public/images/appExplore/Arrow";
-import Context from "./BGApp_";
+import Context from "./Upscaler_";
 import Toggle from "./Toggle";
 import AnimatedButton from "./AnimatedButton";
 import Delete from "../../../public/images/appExplore/Delete.svg";
 import Save from "../../../public/images/appExplore/save.svg";
 import ImageBox from "./ImageBox";
+import Dropdown from "./Dropdown";
 
-export default function WorkingApp() {
+export default function Upscaler() {
   const {
     gliderState,
     glider,
@@ -40,10 +41,9 @@ export default function WorkingApp() {
     >
       <div className={styles.ContentWrapper}>
         <div className={styles.TextWrapper}>
-          <h4 className={styles.Title}>Remove Image Background with AI</h4>
+          <h4 className={styles.Title}>Enhance image quality with AI</h4>
           <h5 className={styles.Description}>
-            Our app gives you the chance to shine against completely clear photo
-            backgrounds
+            Image upscaler can improve image quality using advanced AI models.
           </h5>
         </div>
         <div className={styles.Stack}>
@@ -55,6 +55,7 @@ export default function WorkingApp() {
             SecondSVG={Cube}
             SecondText="Art work"
           />
+          <Dropdown />
           <AnimatedButton
             StartBoolean={StartBoolean}
             onStartButton={onStartButton}
@@ -74,16 +75,18 @@ export default function WorkingApp() {
           onSelectFile={onSelectFile}
           SaveImages={SaveImages}
         />
-
-        <Toggle
-          gliderState={gliderState}
-          glider={glider}
-          FirstSVG={PictureSVG}
-          FirstText="Picture"
-          SecondSVG={Cube}
-          SecondText="Art work"
-          mobileOnly={true}
-        />
+        <div className={styleButton.functionStack}>
+          <Toggle
+            gliderState={gliderState}
+            glider={glider}
+            FirstSVG={PictureSVG}
+            FirstText="Picture"
+            SecondSVG={Cube}
+            SecondText="Art work"
+            mobileOnly={true}
+          />
+          <Dropdown />
+        </div>
         <div className={styleButton.HStackBtn}>
           <AnimatedButton
             StartBoolean={StartBoolean}
