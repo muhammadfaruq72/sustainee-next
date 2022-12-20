@@ -95,7 +95,7 @@ export default function LogIn(Close: Close) {
               </form>
               <div className={styles.line}></div>
               <div className={styles.PwithLink}>
-                <p className={styles.paragraph}>Don't have an account?</p>
+                <p className={styles.paragraph}>Don&apos;t have an account?</p>
                 <p
                   className={styles.paragraph}
                   style={{ color: "#ea2d49", cursor: "pointer" }}
