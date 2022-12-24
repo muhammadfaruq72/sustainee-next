@@ -5,7 +5,7 @@ import { createUploadLink } from "apollo-upload-client";
 import { AuthProvider } from "../components/sections/Global/login_AuthContext";
 
 const httpLink = createUploadLink({
-  uri: "http://127.0.0.1:8000/graphql/",
+  uri: process.env.NEXT_PUBLIC_BACKEND,
 });
 
 const client = new ApolloClient({

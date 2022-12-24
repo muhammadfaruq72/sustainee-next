@@ -23,14 +23,14 @@
 
 .Title {
   font-weight: 600;
-  font-size: clamp(15px, 1.6vw, 35px);
+  font-size: clamp(16px, 1.6vw, 25px);
   margin: 0 auto;
 }
 
 .Subtitle {
   margin: 0 auto;
   text-align: center;
-  font-size: clamp(13px, 1.4vw, 35px);
+  font-size: clamp(16px, 1.4vw, 25px);
   max-width: 95%;
   line-height: 140%;
   color: rgba(0, 0, 0, 0.74);

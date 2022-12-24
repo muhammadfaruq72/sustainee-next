@@ -45,7 +45,7 @@
 }
 @media (max-width: 450px) {
   .Title {
-    font-size: clamp(15px, 1.6vw, 35px);
+    font-size: clamp(18px, 1.6vw, 30px);
   }
 }
 
@@ -60,7 +60,7 @@
 }
 @media (max-width: 450px) {
   .Description {
-    font-size: clamp(13px, 1.4vw, 35px);
+    font-size: clamp(17px, 1.4vw, 30px);
   }
 }
 

@@ -28,12 +28,12 @@
   color: black;
   margin: 0 auto;
   font-weight: 600;
-  font-size: clamp(18px, 2.6vw, 35px);
+  font-size: clamp(18px, 2.6vw, 30px);
 }
 
 .Description {
   color: rgba(0, 0, 0, 0.55);
-  font-size: clamp(13px, 2.3vw, 35px);
+  font-size: clamp(17px, 2.3vw, 30px);
   font-weight: 300;
   margin: 0 auto;
   line-height: 110%;
