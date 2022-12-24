@@ -5,7 +5,7 @@ import { createUploadLink } from "apollo-upload-client";
 import { AuthProvider } from "../components/sections/Global/login_AuthContext";
 
 const httpLink = createUploadLink({
-  uri: process.env.NEXT_PUBLIC_BACKEND,
+  uri: process.env.NEXT_PUBLIC_BACKEND_API,
 });
 
 const client = new ApolloClient({
