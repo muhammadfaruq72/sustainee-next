@@ -13,7 +13,7 @@ export default function Footer() {
           </div>
           <div className="Address">
             Sialkot Cantt, Pakistan <br />
-            sustainee.org@gmail.com
+            faruq.72.786@gmail.com
           </div>
           {/* {<div className="Social">
             <img src="../images/footer/iconFB.png" />

@@ -5,7 +5,9 @@
   gap: 70px;
   max-width: 1018px;
   border-radius: 19px;
-  padding: 40px 10px;
+  padding: 40px 20px;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
   margin-top: 80px !important;
   margin-bottom: 40px !important;
   margin: 0 auto;
@@ -26,5 +28,5 @@
 }
 .Description {
   text-align: justify;
-  max-width: 250px;
+  max-width: 100%;
 }
