@@ -129,6 +129,7 @@ export const UpscalerProvider = ({ children }: Props) => {
   const [selectedFilesArray, setSelectedFilesArray] = useState<File[]>([]);
   const [gliderState, setGlider] = useState("waifu2x_photo");
   const [Option, setOption] = useState("2x");
+  const [onOptionOrGliderChange, SetOnOptionOrGliderChange] = useState(false);
   const [StartBoolean, setStartBoolean] = useState(false);
   const [dragStyle, setDragStyle] = useState<{ border?: any }>({});
 
@@ -219,7 +220,7 @@ export const UpscalerProvider = ({ children }: Props) => {
       // if (typeof selectedImages[i].waifu2x_art === "undefined") {
       //   one = one + 1;
       // }
-      console.log("zero", zero);
+      //console.log("zero", zero);
     }
 
     try {
@@ -269,9 +270,11 @@ export const UpscalerProvider = ({ children }: Props) => {
   }
 
   const onStartButton = () => {
-    selectedImages.forEach((object) => {
-      delete object["UpscaledImage"];
-    });
+    if (onOptionOrGliderChange === true) {
+      selectedImages.forEach((object) => {
+        delete object["UpscaledImage"];
+      });
+    }
 
     setStartBoolean(true);
 
@@ -279,12 +282,18 @@ export const UpscalerProvider = ({ children }: Props) => {
       alert("Please wait for ongoing process.");
     } else {
       StartButton(selectedImages, gliderState, mutate).then(function () {
+        SetOnOptionOrGliderChange(false);
         setStartBoolean(false);
         startTriggered = false;
         //console.log("I'm excecuted", StartBoolean);
       });
     }
   };
+
+  useEffect(() => {
+    //console.log(Option, StartBoolean);
+    SetOnOptionOrGliderChange(true);
+  }, [Option, gliderState]);
 
   const glider = (e: any) => {
     setGlider(e.currentTarget.id);
@@ -299,7 +308,7 @@ export const UpscalerProvider = ({ children }: Props) => {
         Object = object.UpscaledImage;
       }
       if (typeof Object !== "undefined") {
-        console.log(Object, `${object.Imagename?.split(".")[0]}.png`);
+        //console.log(Object, `${object.Imagename?.split(".")[0]}.png`);
         saveAs(`${Object}`, `${object.Imagename?.split(".")[0]}.png`);
         await new Promise((r) => setTimeout(r, 1500));
       }

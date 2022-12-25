@@ -1,6 +1,5 @@
 import styles from "../../../styles/components/SignUp.module.css";
-import Image from "next/image";
-import Sustainee from "../../../public/images/Sustainee.png";
+import Sustaineee from "../../../public/images/Sustaineee.svg";
 import Plus from "../../../public/images/appExplore/plus";
 import { useEffect, useContext } from "react";
 import AuthContext from "./login_AuthContext";
@@ -68,7 +67,7 @@ export default function LogIn(Close: Close) {
             <Plus className={styles.SVGCross} />
           </div>
           <div className={styles.ContentWrapper}>
-            <Image className={styles.Image} src={Sustainee} alt="" />
+            <Sustaineee className={styles.Image} />
             <div className={styles.SignUpWrapper}>
               <h2 style={{ fontSize: "36px", fontWeight: "700" }}>Log in</h2>
               <p className={styles.paragraph}>

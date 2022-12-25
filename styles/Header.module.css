@@ -16,8 +16,10 @@
 }
 
 .logo {
+  /* background-color: white; */
   transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
   cursor: pointer;
+  border-radius: 50px;
 }
 
 .logo:hover {

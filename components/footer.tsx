@@ -1,12 +1,13 @@
 import React from "react";
 import styles from "../styles/Footer.module.css";
+import Sustainee from "../public/images/footer/SUSTAINEE1.svg";
 
 export default function Footer() {
   return (
     <>
       <footer>
         <div className={styles.Wrapper}>
-          <img src="../images/footer/Sustainee.png" />
+          <Sustainee />
           <div className={styles.Description}>
             Sustainee is a young company build to enhance creativity by bringing
             the tools to help you solve problems.

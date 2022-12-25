@@ -6,11 +6,9 @@
   max-width: 1018px;
   border-radius: 19px;
   padding: 40px 20px;
-  margin-left: 20px !important;
-  margin-right: 20px !important;
+  margin: 0px auto;
   margin-top: 80px !important;
   margin-bottom: 40px !important;
-  margin: 0 auto;
   align-items: center;
   justify-content: center;
 }
@@ -24,6 +22,8 @@
   .Wrapper {
     grid-template-columns: auto;
     gap: 30px;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
   }
 }
 .Description {

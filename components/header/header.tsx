@@ -7,6 +7,7 @@ import AuthContext from "../sections/Global/login_AuthContext";
 import User from "../../public/images/appExplore/user";
 import Link from "next/link";
 import Menu from "./Menu";
+import Svg_logo from "../../public/images/Svg_LOGO.svg";
 
 export default function Header() {
   const [openSignUp, setSignUp] = useState<Boolean>(false);
@@ -54,7 +55,7 @@ export default function Header() {
       <header className={styles.HeaderTag}>
         <div className={styles.Wrapper}>
           <Link href="/">
-            <img src="../images/LogoSustainee.png" className={styles.logo} />
+            <Svg_logo className={styles.logo} />
           </Link>
           <div
             onClick={LogOutUser}
