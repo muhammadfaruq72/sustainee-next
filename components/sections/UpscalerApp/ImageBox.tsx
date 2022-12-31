@@ -1,6 +1,6 @@
 import Plus from "../../../public/images/appExplore/plus";
 import SVGCompare from "../../../public/images/appExplore/compare.svg";
-import styles from "../../../styles/components/BGApp/BGApp.module.css";
+import styles from "../../../styles/components/Upscaler/Upscaler.module.css";
 import styleButton from "../../../styles/SmallComponents/Buttons.module.css";
 import back from "../../../public/images/back.png";
 

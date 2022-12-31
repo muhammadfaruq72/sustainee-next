@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import styles from "../../../styles/components/BGApp/BGApp.module.css";
+import styles from "../../../styles/components/Upscaler/Upscaler.module.css";
 import styleButton from "../../../styles/SmallComponents/Buttons.module.css";
 import Cube from "../../../public/images/appExplore/cube";
 import PictureSVG from "../../../public/images/appExplore/picture";

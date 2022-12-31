@@ -254,11 +254,17 @@
   z-index: 1;
 }
 
-.CrossButton {
+.WrapperSVGbuttons {
   position: absolute;
   top: 30px;
   left: 100%;
   margin-left: -40px;
+  display: grid;
+  grid-template-rows: repeat(2, 21px);
+  gap: 15px;
+}
+
+.CrossButton {
   z-index: 1;
   width: 30px;
   height: 30px;
@@ -274,6 +280,24 @@
 .CrossButton:hover {
   transform: rotate(-88deg);
 }
+
+.CompareButton {
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  background: rgba(245, 245, 245);
+  border-radius: 50px;
+  box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.4);
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.CompareButton:hover {
+  transform: scale(1.1);
+}
+
 @media (max-width: 450px) {
   .AddedImages {
     max-width: 1018px;
@@ -288,7 +312,7 @@
     margin: 0px;
     margin-top: 10px !important;
   }
-  .CrossButton {
+  .WrapperSVGbuttons {
     top: 20px;
   }
 }

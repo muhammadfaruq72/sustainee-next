@@ -1,4 +1,4 @@
-import styles from "../../../styles/components/BGApp/BGApp.module.css";
+import styles from "../../../styles/components/Upscaler/Upscaler.module.css";
 
 interface props {
   gliderState: string;
