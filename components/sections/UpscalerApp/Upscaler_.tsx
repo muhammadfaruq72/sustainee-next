@@ -26,76 +26,6 @@ interface typeContext {
 const Context = createContext<typeContext>({});
 export default Context;
 
-function MUTATION(gliderState: any, Option: any) {
-  var MUTATION: any;
-  if (gliderState === "waifu2x_photo" && Option === "2x") {
-    MUTATION = `
-          mutation ($file: Upload!) {
-            Upscaler(file: $file, model: "waifu2x_photo", scale: 1.5) {
-              name
-              imageFile
-            }
-          }
-        `;
-  }
-  if (gliderState === "waifu2x_photo" && Option === "3x") {
-    MUTATION = `
-          mutation ($file: Upload!) {
-            Upscaler(file: $file, model: "waifu2x_photo", scale: 2.0) {
-              name
-              imageFile
-            }
-          }
-        `;
-  }
-
-  if (gliderState === "waifu2x_art" && Option === "2x") {
-    MUTATION = `
-          mutation ($file: Upload!) {
-            Upscaler(file: $file, model: "waifu2x_art", scale: 1.5) {
-              name
-              imageFile
-            }
-          }
-        `;
-  }
-  if (gliderState === "waifu2x_art" && Option === "3x") {
-    MUTATION = `
-          mutation ($file: Upload!) {
-            Upscaler(file: $file, model: "waifu2x_art", scale: 2.0) {
-              name
-              imageFile
-            }
-          }
-        `;
-  }
-
-  MUTATION = gql`
-    ${MUTATION}
-  `;
-  return MUTATION;
-}
-
-const contentType = "image/png";
-var blob;
-var name: any;
-function ResponseData(data: any, setSelectedImages: any) {
-  blob = base64StringToBlob(data.imageFile, contentType);
-  name = data.name;
-  const blobImage = URL.createObjectURL(blob);
-  setSelectedImages((current: any) =>
-    current.map((obj: any) => {
-      if (obj.Imagename === name) {
-        return { ...obj, UpscaledImage: blobImage };
-      }
-      // if (obj.Imagename === name && Model === "waifu2x_art") {
-      //   return { ...obj, waifu2x_art: blobImage };
-      // }
-      return obj;
-    })
-  );
-}
-
 interface File {
   name: string;
   lastModified: number;
@@ -309,7 +239,7 @@ export const UpscalerProvider = ({ children }: Props) => {
       }
       if (typeof Object !== "undefined") {
         //console.log(Object, `${object.Imagename?.split(".")[0]}.png`);
-        saveAs(`${Object}`, `${object.Imagename?.split(".")[0]}.png`);
+        saveAs(`${Object}`, `${object.Imagename}`);
         await new Promise((r) => setTimeout(r, 1500));
       }
     }
@@ -337,3 +267,73 @@ export const UpscalerProvider = ({ children }: Props) => {
 
   return <Context.Provider value={contextData}>{children}</Context.Provider>;
 };
+
+function MUTATION(gliderState: any, Option: any) {
+  var MUTATION: any;
+  if (gliderState === "waifu2x_photo" && Option === "2x") {
+    MUTATION = `
+          mutation ($file: Upload!) {
+            Upscaler(file: $file, model: "waifu2x_photo", scale: 1.5) {
+              name
+              imageFile
+            }
+          }
+        `;
+  }
+  if (gliderState === "waifu2x_photo" && Option === "3x") {
+    MUTATION = `
+          mutation ($file: Upload!) {
+            Upscaler(file: $file, model: "waifu2x_photo", scale: 2.0) {
+              name
+              imageFile
+            }
+          }
+        `;
+  }
+
+  if (gliderState === "waifu2x_art" && Option === "2x") {
+    MUTATION = `
+          mutation ($file: Upload!) {
+            Upscaler(file: $file, model: "waifu2x_art", scale: 1.5) {
+              name
+              imageFile
+            }
+          }
+        `;
+  }
+  if (gliderState === "waifu2x_art" && Option === "3x") {
+    MUTATION = `
+          mutation ($file: Upload!) {
+            Upscaler(file: $file, model: "waifu2x_art", scale: 2.0) {
+              name
+              imageFile
+            }
+          }
+        `;
+  }
+
+  MUTATION = gql`
+    ${MUTATION}
+  `;
+  return MUTATION;
+}
+
+const contentType = "image/png";
+var blob;
+var name: any;
+function ResponseData(data: any, setSelectedImages: any) {
+  blob = base64StringToBlob(data.imageFile, contentType);
+  name = data.name;
+  const blobImage = URL.createObjectURL(blob);
+  setSelectedImages((current: any) =>
+    current.map((obj: any) => {
+      if (obj.Imagename === name) {
+        return { ...obj, UpscaledImage: blobImage };
+      }
+      // if (obj.Imagename === name && Model === "waifu2x_art") {
+      //   return { ...obj, waifu2x_art: blobImage };
+      // }
+      return obj;
+    })
+  );
+}

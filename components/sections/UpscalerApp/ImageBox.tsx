@@ -1,4 +1,5 @@
 import Plus from "../../../public/images/appExplore/plus";
+import SVGCompare from "../../../public/images/appExplore/compare.svg";
 import styles from "../../../styles/components/BGApp/BGApp.module.css";
 import styleButton from "../../../styles/SmallComponents/Buttons.module.css";
 import back from "../../../public/images/back.png";
@@ -14,6 +15,8 @@ interface props {
   selectedFilesArray: any;
   onSelectFile: any;
   SaveImages: any;
+  setCloseCompareImage: any;
+  setCompareImaage: any;
 }
 
 export default function ImageBox(Props: props) {
@@ -58,20 +61,49 @@ export default function ImageBox(Props: props) {
                     //onLoad={(image) => handleSize(image)}
                   ></img>
                 </div>
-                <div
-                  className={styles.CrossButton}
-                  onClick={() => {
-                    Props.setSelectedImages(
-                      Props.selectedImages.filter((e: any) => e !== Image)
-                    );
-                    Props.setSelectedFilesArray(
-                      Props.selectedFilesArray.filter(
-                        (e: any) => e.name !== Image.Imagename
-                      )
-                    );
-                  }}
-                >
-                  <Plus className={styles.SVGCross} />
+                <div className={styles.WrapperSVGbuttons}>
+                  <div
+                    className={styles.CrossButton}
+                    onClick={() => {
+                      Props.setSelectedImages(
+                        Props.selectedImages.filter((e: any) => e !== Image)
+                      );
+                      Props.setSelectedFilesArray(
+                        Props.selectedFilesArray.filter(
+                          (e: any) => e.name !== Image.Imagename
+                        )
+                      );
+                    }}
+                  >
+                    <Plus className={styles.SVGCross} />
+                  </div>
+                  <div
+                    style={{
+                      display: `${
+                        typeof Image.UpscaledImage !== "undefined"
+                          ? "grid"
+                          : "none"
+                      }`,
+                    }}
+                    className={styles.CompareButton}
+                    onClick={() => {
+                      Props.setCloseCompareImage(true);
+                      Props.setCompareImaage({
+                        original: Image.originalImage,
+                        converted: Image.UpscaledImage,
+                        ArrayIndex: index,
+                      });
+                    }}
+                  >
+                    <SVGCompare
+                      style={{
+                        transform: "rotate(0deg)",
+                        width: "19px",
+                        height: "19px",
+                      }}
+                      className={styles.SVGCross}
+                    />
+                  </div>
                 </div>
               </div>
             ))}

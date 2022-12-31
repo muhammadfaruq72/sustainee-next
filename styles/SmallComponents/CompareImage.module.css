@@ -1,0 +1,132 @@
+.overlay {
+  top: 0;
+  left: 0;
+  position: fixed;
+  backdrop-filter: blur(15px);
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.2);
+  animation: fade-in linear 0.5s 1 normal forwards !important;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.Wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  width: min(calc(100% - 20px), 1012px);
+  height: min(100%, 600px);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(40px);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 19px;
+  display: grid;
+  align-items: center;
+  animation: fade-in linear 0.5s 1 normal forwards !important;
+  overflow: hidden;
+}
+
+.TopBar {
+  position: absolute;
+  width: calc(100% - 20px);
+  top: 0;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.Section {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px;
+}
+
+.CrossButton {
+  width: 30px;
+  height: 30px;
+  background: rgba(245, 245, 245);
+  border-radius: 50px;
+  box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.4);
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.CrossButton:hover {
+  transform: rotate(-88deg);
+}
+
+.SVGCross {
+  fill: #868686;
+  width: 21px;
+  height: 21px;
+  transform: rotate(-44deg);
+}
+
+.SVGButtons {
+  width: 30px;
+  height: 30px;
+  background: rgba(245, 245, 245);
+  border-radius: 50px;
+  box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.4);
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  transition: 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.SVGButtons:hover {
+  transform: scale(1.1);
+}
+
+.SVGSave {
+  stroke: #868686;
+  width: 18px;
+  height: 18px;
+  transform: scale(1.1);
+}
+
+.WrapperCompare {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* height: min(100%, 600px) !important; */
+}
+
+.ImgComparisonSlider {
+  /* outline: none; */
+  user-select: none !important;
+  cursor: pointer !important;
+  width: 100%;
+  height: 100%;
+}
+
+.CompareImage {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+
+@media (max-width: 450px) {
+  .Wrapper {
+    height: min(100%, 500px);
+  }
+  .CompareImage {
+    height: 500px;
+  }
+}
