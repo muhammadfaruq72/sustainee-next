@@ -52,14 +52,14 @@
   margin: 0 auto;
   text-align: center;
   font-weight: 600;
-  font-size: clamp(16px, 1.6vw, 25px);
+  font-size: clamp(16px, 1.6vw, 22px);
 }
 
 .Subtitle {
   margin: 0 auto;
   text-align: center;
   color: rgba(0, 0, 0, 0.74);
-  font-size: clamp(16px, 1.4vw, 25px);
+  font-size: clamp(16px, 1.4vw, 22px);
   line-height: 140%;
 }
 
