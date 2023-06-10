@@ -1,4 +1,11 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sustainee | The AI Tools App Built with Django and Next.js.
+
+Figma - https://www.figma.com/file/lNveGKDHYTPafm0ADrrNgD/
+
+Deployed - https://sustainee.netlify.app/
+
+Backend - https://github.com/muhammadfaruq72/SustaineeDjango
+
 
 ## Getting Started
 
